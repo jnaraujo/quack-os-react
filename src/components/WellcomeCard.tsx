@@ -47,7 +47,9 @@ export default function WellcomeCard() {
         <Text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
         </Text>
-        <button onClick={close}>Ok!</button>
+        <button className="button" onClick={close}>
+          Ok!
+        </button>
       </Content>
     </Card>
   );

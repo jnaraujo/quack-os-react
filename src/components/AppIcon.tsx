@@ -20,7 +20,8 @@ const Content = styled.div<{
   height: number;
   clicked: boolean;
 }>`
-  position: absolute;
+  width: fit-content;
+  height: fit-content;
 
   display: flex;
   flex-direction: column;
@@ -85,6 +86,7 @@ export default function AppIcon({
       <Draggable
         disabled={isDraggable !== true}
         defaultPosition={defaultPosition}
+        bounds="parent"
       >
         <Content
           ref={ref}

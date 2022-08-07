@@ -8,8 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ApplicationProvider from "./contexts/applicationContext";
 // Pages
-const Home = lazy(() => import("./pages/Home"));
 const Loading = lazy(() => import("./pages/Loading"));
+import Home from "./pages/Home";
 
 const App = () => (
   <ThemeProvider theme={lightTheme}>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  overflow: hidden;
   position: relative;
   margin: 0;
   padding: 0;
@@ -17,4 +18,10 @@ export const Container = styled.div`
   .teste {
     width: 200px;
   }
+`;
+
+export const Content = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
 `;

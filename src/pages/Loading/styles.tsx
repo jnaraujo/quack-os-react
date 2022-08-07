@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  &.startedUp {
+    div {
+      display: none;
+    }
+  }
+
   background-color: ${({ theme }) => theme.colors.black};
   width: 100vw;
   height: 100vh;

@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 
-import { Container } from "../../styles/Home";
+import { Container, Content } from "../../styles/Home";
 
 //hooks
 import { useApps } from "../../hooks/appHook";
@@ -17,13 +17,47 @@ import Clock from "../../components/Clock";
 import Application from "../../components/Application";
 import WellcomeCard from "../../components/WellcomeCard";
 import Terminal from "../../components/Terminal";
+import Browser from "../../components/Browser";
+import TopBar from "../../components/TopBar";
+
+const AppsOnDesktop = [
+  {
+    title: "Clock",
+    id: "clock",
+    icon: "icons/clock/Clock_Face.svg",
+    defaultPosition: {
+      x: 20,
+      y: 20,
+    },
+    node: <Clock />,
+  },
+  {
+    title: "Terminal",
+    id: "terminal",
+    icon: "/icons/applications/calculator.svg",
+    defaultPosition: {
+      x: 20,
+      y: 20,
+    },
+    node: <Terminal />,
+  },
+  {
+    title: "Navigator",
+    id: "navigator",
+    icon: "/icons/applications/Brosen_windrose.svg",
+    defaultPosition: {
+      x: 20,
+      y: 20,
+    },
+    node: <Browser />,
+  },
+];
 
 const Home = () => {
   const { apps, addApp } = useApps();
   const { width, height } = useWindowSize();
 
   useEffect(() => {
-    console.log("clock");
     addApp({
       node: <Clock />,
       id: "clock",
@@ -33,56 +67,55 @@ const Home = () => {
     });
   }, []);
 
+  const onDoubleClick = (app: {
+    title: string;
+    id: string;
+    node: ReactNode;
+  }) => {
+    return addApp({
+      node: app.node,
+      id: app.id,
+      title: app.title,
+    });
+  };
+
   return (
     <>
       <Container>
-        <AppIcon
-          title="Clock"
-          isDraggable
-          icon="icons/clock/Clock_Face.svg"
-          defaultPosition={{
-            x: 20,
-            y: 20,
-          }}
-          onDoubleClick={() =>
-            addApp({
-              node: <Clock />,
-              id: "clock",
-              title: "Clock",
-            })
-          }
-        />
+        <TopBar />
 
-        <AppIcon
-          title="Terminal"
-          isDraggable
-          icon="/icons/applications/calculator.svg"
-          defaultPosition={{
-            x: 20,
-            y: 120,
-          }}
-          onDoubleClick={() =>
-            addApp({
-              node: <Terminal />,
-              id: "terminal",
-              title: "Terminal",
-            })
-          }
-        />
+        <Content>
+          {apps.map((app) => (
+            <Application
+              key={app.id}
+              title={app.title}
+              id={app.id}
+              x={app.x}
+              y={app.y}
+            >
+              {app.node}
+            </Application>
+          ))}
 
-        {apps.map((app) => (
-          <Application
-            key={app.id}
-            title={app.title}
-            id={app.id}
-            x={app.x}
-            y={app.y}
-          >
-            {app.node}
-          </Application>
-        ))}
+          {AppsOnDesktop.map((app) => (
+            <AppIcon
+              key={app.id}
+              title={app.title}
+              icon={app.icon}
+              defaultPosition={app.defaultPosition}
+              isDraggable
+              onDoubleClick={() =>
+                onDoubleClick({
+                  title: app.title,
+                  id: app.id,
+                  node: app.node,
+                })
+              }
+            />
+          ))}
 
-        <WellcomeCard />
+          <WellcomeCard />
+        </Content>
       </Container>
     </>
   );

@@ -1,12 +1,14 @@
 import Title from "./Title";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Draggable from "react-draggable";
 import { useWindowSize } from "react-use";
 import { useApps } from "../hooks/appHook";
 
 const Content = styled.div`
   position: absolute;
+  z-index: 3;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,8 +81,19 @@ export default function Application(props: IApplicationProps) {
   const cardWidth = 350;
   const cardHeight = 270;
 
-  const x = props.x != undefined ? props.x : width / 2 - cardWidth / 2;
-  const y = props.y != undefined ? props.y : height / 2 - cardHeight / 2;
+  const position = useMemo(() => {
+    if (props.x && props.y) {
+      return {
+        x: props.x,
+        y: props.y,
+      };
+    } else {
+      return {
+        x: (width - cardWidth) / 2,
+        y: (height - cardHeight) / 2,
+      };
+    }
+  }, [props.x, props.y, width, height]);
 
   const move = () => {
     setIsDraggable(true);
@@ -104,8 +117,8 @@ export default function Application(props: IApplicationProps) {
   return (
     <Draggable
       defaultPosition={{
-        x,
-        y,
+        x: position.x,
+        y: position.y,
       }}
       disabled={!isDraggable}
     >

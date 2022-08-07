@@ -66,7 +66,7 @@ const GlobalStyles = createGlobalStyle`
         height: 35px;
     }
 
-    button{
+    .button{
         all: unset;
 
         background-image: url("/buttons/button/Default.svg");

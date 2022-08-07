@@ -1,24 +1,35 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useApps } from "../../hooks/appHook";
 
 import { Container } from "./styles";
 
+const loadingChar = ["|", "/", "—", "\\"];
+
 export default function Loading() {
-  const [loadingText, setLoadingText] = useState(0);
+  const [startedUp, setStartedUp] = useState(false);
+  const [loadingCount, setLoadingCount] = useState(0);
+
+  const { clearApps } = useApps();
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    clearApps();
+
+    setTimeout(() => {
+      setStartedUp(true);
+    }, 500);
     const interval = setInterval(() => {
-      setLoadingText((prev) => {
-        if (prev === 2) return 0;
+      setLoadingCount((prev) => {
+        if (prev === 3) return 0;
         return prev + 1;
       });
     }, 300);
 
     setTimeout(() => {
       navigate("/home");
-    }, 1500);
+    }, 3000);
 
     return () => {
       clearInterval(interval);
@@ -26,7 +37,7 @@ export default function Loading() {
   }, []);
 
   return (
-    <Container>
+    <Container className={`${startedUp === false ? "startedUp" : ""}`}>
       <div className="brand">
         <img src="/brand/jna_white.svg" width={500} />
       </div>
@@ -35,11 +46,11 @@ export default function Loading() {
         <h2>Beta Release</h2>
       </div>
       <div>
-        <h2>{String("").padStart(loadingText + 1, ".")}</h2>
+        <h2>{loadingChar[loadingCount]}</h2>
       </div>
       <div>
-        <h2>Copyright (c) JNT Comporation, 1995. All Rights Reserved.</h2>
-        <h2>ReactOS is a registered trademark of JNT Corp.</h2>
+        <h2>Copyright (c) JNA Comporation, 1995. All Rights Reserved.</h2>
+        <h2>ReactOS is a registered trademark of JNA Corp.</h2>
       </div>
     </Container>
   );

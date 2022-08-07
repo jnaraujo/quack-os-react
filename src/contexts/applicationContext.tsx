@@ -5,6 +5,7 @@ const applicationContext = createContext<ApplicationType>({
   apps: [],
   addApp: (app: App) => {},
   removeApp: (id: string) => {},
+  clearApps: () => {},
 });
 
 function randomFixedInteger(length: number) {
@@ -18,16 +19,16 @@ const applicationProvider = ({ children }: { children: ReactNode }) => {
   const [apps, setApps] = useState<App[]>([]);
 
   const addApp = (app: App) => {
-    if (!apps.find((app) => app.id === app.id)) {
-      setApps([...apps, app]);
-    } else {
-      app.id = app.id + "-" + randomFixedInteger(10);
-      setApps([...apps, app]);
-    }
+    app.id = app.id + "-" + randomFixedInteger(10);
+    setApps([...apps, app]);
   };
 
   const removeApp = (id: string) => {
     setApps((prev) => prev.filter((app) => app.id !== id));
+  };
+
+  const clearApps = () => {
+    setApps([]);
   };
 
   return (
@@ -36,6 +37,7 @@ const applicationProvider = ({ children }: { children: ReactNode }) => {
         apps,
         addApp,
         removeApp,
+        clearApps,
       }}
     >
       {children}

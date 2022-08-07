@@ -15,6 +15,7 @@ interface ApplicationType {
   apps: App[];
   addApp: (app: App) => void;
   removeApp: (id: string) => void;
+  clearApps: () => void;
 }
 
 export type { ApplicationType };

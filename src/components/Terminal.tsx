@@ -1,5 +1,6 @@
 //@ts-ignore
 import ReactTerminal from "react-console-emulator";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useApps } from "../hooks/appHook";
 
@@ -31,6 +32,8 @@ const Container = styled.div`
 `;
 
 export default function Terminal() {
+  const navigate = useNavigate();
+
   const { apps, removeApp } = useApps();
   const commands = {
     echo: {
@@ -42,6 +45,13 @@ export default function Terminal() {
       description: "List all processes.",
       usage: "ps",
       fn: () => apps.map((app) => `${app.title} - ${app.id}`).join("\n"),
+    },
+    reboot: {
+      description: "Reboot the computer.",
+      usage: "reboot",
+      fn: () => {
+        navigate("/");
+      },
     },
     kill: {
       description: "Kill a process.",
