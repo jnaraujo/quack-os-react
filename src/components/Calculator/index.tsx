@@ -1,6 +1,5 @@
 import { ReactElement, ReactNode, useState } from "react";
 import { Container } from "./styles";
-import { reversePolishNotation } from "./util";
 
 const Button = ({
   text,
