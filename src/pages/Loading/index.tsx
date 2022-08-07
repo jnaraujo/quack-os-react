@@ -28,7 +28,7 @@ export default function Loading() {
     }, 300);
 
     setTimeout(() => {
-      navigate("/home");
+      navigate("/os");
     }, 3000);
 
     return () => {

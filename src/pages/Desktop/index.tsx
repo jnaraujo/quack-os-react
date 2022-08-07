@@ -19,6 +19,7 @@ import WellcomeCard from "../../components/WellcomeCard";
 import Terminal from "../../components/Terminal";
 import Browser from "../../components/Browser";
 import TopBar from "../../components/TopBar";
+import Calculator from "../../components/Calculator";
 
 const AppsOnDesktop = [
   {
@@ -34,7 +35,7 @@ const AppsOnDesktop = [
   {
     title: "Terminal",
     id: "terminal",
-    icon: "/icons/applications/calculator.svg",
+    icon: "/icons/applications/Terminal.png",
     defaultPosition: {
       x: 20,
       y: 20,
@@ -51,9 +52,19 @@ const AppsOnDesktop = [
     },
     node: <Browser />,
   },
+  {
+    title: "Calculator",
+    id: "calculator",
+    icon: "/icons/applications/calculator.svg",
+    defaultPosition: {
+      x: 20,
+      y: 20,
+    },
+    node: <Calculator />,
+  },
 ];
 
-const Home = () => {
+const Desktop = () => {
   const { apps, addApp } = useApps();
   const { width, height } = useWindowSize();
 
@@ -121,4 +132,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Desktop;
