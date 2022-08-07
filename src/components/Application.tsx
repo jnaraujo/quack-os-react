@@ -13,10 +13,17 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid ${({ theme }) => theme.colors.black};
+  border: 8px solid ${({ theme }) => theme.colors.black};
+
+  border-radius: 8px;
+  overflow: hidden;
+
   width: fit-content;
   height: fit-content;
-  background-color: ${({ theme }) => theme.colors.white};
+
+  .back {
+    background-color: ${({ theme }) => theme.colors.white};
+  }
 
   min-width: 200px;
 
@@ -131,10 +138,12 @@ export default function Application(props: IApplicationProps) {
           <div className="close" onClick={close}></div>
         </div>
 
-        <div
-          className={`application ${loading === true ? "loading" : "loaded"}`}
-        >
-          {props.children}
+        <div className="back">
+          <div
+            className={`application ${loading === true ? "loading" : "loaded"}`}
+          >
+            {props.children}
+          </div>
         </div>
       </Content>
     </Draggable>
