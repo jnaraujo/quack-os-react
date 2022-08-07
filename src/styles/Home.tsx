@@ -11,7 +11,8 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.colors.red};
 
-  background-image: url("/pattern/dotted/medium.svg");
+  /* background-image: url("/pattern/hatch/light.svg"); */
+
   background-size: 5px 5px;
   background-repeat: repeat;
 
