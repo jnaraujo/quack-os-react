@@ -7,9 +7,9 @@ import { GlobalStyles } from "./styles/globals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ApplicationProvider from "./contexts/applicationContext";
+
 // Pages
-const Loading = lazy(() => import("./pages/Loading"));
-import Desktop from "./pages/Desktop";
+import Main from "./pages/Main";
 
 const App = () => {
   return (
@@ -18,8 +18,7 @@ const App = () => {
       <BrowserRouter>
         <ApplicationProvider>
           <Routes>
-            <Route path="/" element={<Loading />} />
-            <Route path="/os" element={<Desktop />} />
+            <Route path="/" element={<Main />} />
           </Routes>
         </ApplicationProvider>
       </BrowserRouter>

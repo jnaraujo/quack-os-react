@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useApps } from "../../hooks/appHook";
 
 import { Container } from "./styles";
@@ -11,8 +10,6 @@ export default function Loading() {
   const [loadingCount, setLoadingCount] = useState(0);
 
   const { clearApps } = useApps();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     clearApps();
@@ -26,10 +23,6 @@ export default function Loading() {
         return prev + 1;
       });
     }, 300);
-
-    setTimeout(() => {
-      navigate("/os");
-    }, 3000);
 
     return () => {
       clearInterval(interval);
