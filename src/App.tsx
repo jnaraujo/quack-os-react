@@ -1,12 +1,10 @@
-import { lazy, ReactElement, useEffect, useState } from "react";
-
 import { ThemeProvider } from "styled-components";
-import { lightTheme } from "./styles/themes";
 import { GlobalStyles } from "./styles/globals";
+import { lightTheme } from "./styles/themes";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import ApplicationProvider from "./contexts/applicationContext";
+import ApplicationProvider from "./contexts/ApplicationContext";
 
 // Pages
 import Main from "./pages/Main";

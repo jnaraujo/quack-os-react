@@ -1,7 +1,7 @@
 import { createContext, useState, ReactNode } from "react";
 import { ApplicationType, App } from "../types/ApplicationType";
 
-const applicationContext = createContext<ApplicationType>({
+const ApplicationContext = createContext<ApplicationType>({
   apps: [],
   addApp: (app: App) => {},
   removeApp: (id: string) => {},
@@ -15,11 +15,12 @@ function randomFixedInteger(length: number) {
   );
 }
 
-const applicationProvider = ({ children }: { children: ReactNode }) => {
+const ApplicationProvider = ({ children }: { children: ReactNode }) => {
   const [apps, setApps] = useState<App[]>([]);
 
   const addApp = (app: App) => {
     app.id = app.id + "-" + randomFixedInteger(10);
+    app.start = Date.now();
     setApps([...apps, app]);
   };
 
@@ -32,7 +33,7 @@ const applicationProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <applicationContext.Provider
+    <ApplicationContext.Provider
       value={{
         apps,
         addApp,
@@ -41,10 +42,10 @@ const applicationProvider = ({ children }: { children: ReactNode }) => {
       }}
     >
       {children}
-    </applicationContext.Provider>
+    </ApplicationContext.Provider>
   );
 };
 
-export { applicationContext };
+export { ApplicationContext };
 
-export default applicationProvider;
+export default ApplicationProvider;
