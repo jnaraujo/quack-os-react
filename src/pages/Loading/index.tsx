@@ -32,18 +32,18 @@ export default function Loading() {
   return (
     <Container className={`${startedUp === false ? "startedUp" : ""}`}>
       <div className="brand">
-        <img src="/brand/jna_white.svg" width={500} />
+        <img src="/brand/duck.png" width={300} />
       </div>
       <div>
-        <h2>ReactOS</h2>
+        <h2>QuackOS</h2>
         <h2>Beta Release</h2>
       </div>
       <div>
         <h2>{loadingChar[loadingCount]}</h2>
       </div>
       <div>
-        <h2>Copyright (c) JNA Comporation, 1995. All Rights Reserved.</h2>
-        <h2>ReactOS is a registered trademark of JNA Corp.</h2>
+        <h2>Quackright (c) Duck Comporation, 1995. All Rights Reserved.</h2>
+        <h2>QuackOS is a registered trademark of Quack Corp.</h2>
       </div>
     </Container>
   );

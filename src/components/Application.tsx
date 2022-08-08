@@ -1,6 +1,6 @@
 import Title from "./Title";
 import styled from "styled-components";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import Draggable from "react-draggable";
 import { useWindowSize } from "react-use";
 import { useApps } from "../hooks/appHook";
@@ -13,7 +13,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 8px solid ${({ theme }) => theme.colors.black};
+  border: 6px solid ${({ theme }) => theme.colors.black};
 
   border-radius: 8px;
   overflow: hidden;
@@ -70,14 +70,14 @@ const Content = styled.div`
 `;
 
 interface IApplicationProps {
-  children: React.ReactNode;
+  node: ({}: { appId: string }) => JSX.Element;
   title: string;
   id: string;
   x?: number;
   y?: number;
 }
 
-export default function Application(props: IApplicationProps) {
+function Application(props: IApplicationProps) {
   const [isDraggable, setIsDraggable] = useState(false);
 
   const [loading, setLoading] = useState(true);
@@ -142,10 +142,12 @@ export default function Application(props: IApplicationProps) {
           <div
             className={`application ${loading === true ? "loading" : "loaded"}`}
           >
-            {props.children}
+            <props.node appId={props.id} />
           </div>
         </div>
       </Content>
     </Draggable>
   );
 }
+
+export default memo(Application);

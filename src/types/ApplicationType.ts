@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
-
 interface App {
   id: string;
-  node: ReactNode;
+  node: ({}: { appId: string }) => JSX.Element;
   title: string;
+
+  start: number;
 
   x?: number;
   y?: number;

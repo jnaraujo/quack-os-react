@@ -44,23 +44,41 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  .background {
+    width: 100%;
+    height: 100%;
+
+    background-color: ${({ theme }) => theme.colors.white};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
 `;
 
-export default function Browser() {
-  const defaultUrl = "https://jnaraujo.com";
-  const [url, setUrl] = useState(defaultUrl);
+export default function Navigator(props: any) {
+  const [url, setUrl] = useState("");
 
-  const [history, setHistory] = useState([defaultUrl]);
+  const [history, setHistory] = useState<string[]>([]);
 
   const backHistory = () => {
     const newHistory = [...history];
-    if (newHistory.length == 1) return;
     newHistory.pop();
     setHistory(newHistory);
     setUrl(newHistory[newHistory.length - 1]);
   };
 
   const addHistory = (url: string) => {
+    if (!url) {
+      setHistory([]);
+      return;
+    }
     if (history.at(-1) === url) return;
 
     const newHistory = [...history];
@@ -80,10 +98,6 @@ export default function Browser() {
     }
   };
 
-  useEffect(() => {
-    console.log(history);
-  }, [history]);
-
   return (
     <Container>
       <div>
@@ -95,7 +109,19 @@ export default function Browser() {
           onKeyDown={onKeyDown}
         />
       </div>
-      <iframe sandbox="allow-same-origin" src={history.at(-1)}></iframe>
+      {history[0] != undefined ? (
+        <iframe sandbox="allow-same-origin" src={history.at(-1)} />
+      ) : (
+        <div className="background">
+          <img
+            src="/public/brand/duck.png"
+            width={200}
+            height={200}
+            alt="quack os logo"
+          />
+          <h2>Quack!</h2>
+        </div>
+      )}
     </Container>
   );
 }

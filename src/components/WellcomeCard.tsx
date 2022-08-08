@@ -43,7 +43,7 @@ export default function WellcomeCard() {
       }}
     >
       <Content>
-        <Title>Bem-vindo!</Title>
+        <Title>Wellcome to QuackOS!</Title>
         <Text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
         </Text>

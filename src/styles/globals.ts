@@ -43,7 +43,7 @@ const GlobalStyles = createGlobalStyle`
         background: ${({ theme }) => theme.colors.white};
         border: 2px solid ${({ theme }) => theme.colors.black};
     }
-    /* Up */
+    //up
     ::-webkit-scrollbar-button:single-button:vertical:decrement {
         background-image: url("icons/arrows/arrow/up.svg");
         background-repeat: no-repeat;

@@ -32,7 +32,7 @@ export default function TopBar() {
         items={[
           {
             id: "1",
-            node: <div>About the ReactOS</div>,
+            node: <div>About the DuckOS</div>,
           },
           {
             id: "2",
@@ -42,7 +42,8 @@ export default function TopBar() {
                   addApp({
                     id: "terminal",
                     title: "Terminal",
-                    node: <Terminal />,
+                    node: Terminal,
+                    start: Date.now(),
                   })
                 }
               >

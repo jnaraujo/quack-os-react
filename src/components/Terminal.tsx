@@ -12,9 +12,14 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.white} !important;
     color: ${({ theme }) => theme.colors.black} !important;
 
+    /* overflow: hidden !important; */
+
     .text {
       color: ${({ theme }) => theme.colors.black} !important;
       font-family: "Fixedsys Excelsior", monospace !important;
+    }
+
+    .content {
     }
 
     .inputArea {
@@ -44,13 +49,22 @@ export default function Terminal() {
     ps: {
       description: "List all processes.",
       usage: "ps",
-      fn: () => apps.map((app) => `${app.title} - ${app.id}`).join("\n"),
+      fn: () =>
+        apps
+          .map(
+            (app) =>
+              `${app.title} - ${app.id} - ${(
+                (Date.now() - app.start) /
+                1000
+              ).toFixed(2)} sec(s)`
+          )
+          .join("\n"),
     },
     reboot: {
       description: "Reboot the computer.",
       usage: "reboot",
       fn: () => {
-        navigate("/");
+        navigate(0);
       },
     },
     kill: {
@@ -73,9 +87,9 @@ export default function Terminal() {
       <ReactTerminal
         className="terminal"
         commands={commands}
-        promptLabel={"C>"}
+        promptLabel={"user@duckos:~$"}
         inputClassName="text"
-        contentClassName="text"
+        contentClassName="content"
         messageClassName="text"
         promptLabelClassName="text"
         inputAreaClassName="inputArea"

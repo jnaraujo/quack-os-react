@@ -16,8 +16,8 @@ export const OsIcon = styled.div<{
 }>`
   width: 50px;
   height: 40px;
-  background-image: url("/brand/icon.png");
-  background-size: auto 100%;
+  background-image: url("/brand/duck.png");
+  background-size: auto 80%;
   background-repeat: no-repeat;
   background-position: center;
 

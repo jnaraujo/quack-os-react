@@ -17,7 +17,7 @@ import Clock from "../../components/Clock";
 import Application from "../../components/Application";
 import WellcomeCard from "../../components/WellcomeCard";
 import Terminal from "../../components/Terminal";
-import Browser from "../../components/Browser";
+import Navigator from "../../components/Navigator";
 import TopBar from "../../components/TopBar";
 import Calculator from "../../components/Calculator";
 
@@ -30,7 +30,7 @@ const AppsOnDesktop = [
       x: 20,
       y: 20,
     },
-    node: <Clock />,
+    node: Clock,
   },
   {
     title: "Terminal",
@@ -40,17 +40,17 @@ const AppsOnDesktop = [
       x: 20,
       y: 20,
     },
-    node: <Terminal />,
+    node: Terminal,
   },
   {
-    title: "Navigator",
+    title: "Duck's Boat Navigator",
     id: "navigator",
     icon: "/icons/applications/Brosen_windrose.svg",
     defaultPosition: {
       x: 20,
       y: 20,
     },
-    node: <Browser />,
+    node: Navigator,
   },
   {
     title: "Calculator",
@@ -60,7 +60,7 @@ const AppsOnDesktop = [
       x: 20,
       y: 20,
     },
-    node: <Calculator />,
+    node: Calculator,
   },
 ];
 
@@ -70,23 +70,25 @@ const Desktop = () => {
 
   useEffect(() => {
     addApp({
-      node: <Clock />,
+      node: Clock,
       id: "clock",
       title: "Clock",
       x: width - 400,
       y: 20,
+      start: Date.now(),
     });
   }, []);
 
   const onDoubleClick = (app: {
     title: string;
     id: string;
-    node: ReactNode;
+    node: ReactNode | any;
   }) => {
     return addApp({
       node: app.node,
       id: app.id,
       title: app.title,
+      start: Date.now(),
     });
   };
 
@@ -103,9 +105,8 @@ const Desktop = () => {
               id={app.id}
               x={app.x}
               y={app.y}
-            >
-              {app.node}
-            </Application>
+              node={app.node}
+            />
           ))}
 
           {AppsOnDesktop.map((app) => (
