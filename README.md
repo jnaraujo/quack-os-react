@@ -1,5 +1,5 @@
 <div align="center" >
-  <h1>🦆 DuckOS - A (fake) web based OS</h1>
+  <h1>🦆 DuckOS - A (fake) web-based OS</h1>
 </div>
 
 <div align="center">
