@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useApps } from "../../hooks/appHook";
+import { useApps } from "../../hooks/useApp";
 
 import { Container } from "./styles";
 

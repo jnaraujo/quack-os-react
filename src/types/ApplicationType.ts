@@ -3,7 +3,7 @@ interface App {
   node: ({}: { appId: string }) => JSX.Element;
   title: string;
 
-  start: number;
+  start?: number;
 
   x?: number;
   y?: number;

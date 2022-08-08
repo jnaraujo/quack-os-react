@@ -1,13 +1,14 @@
 import { useRef, useState } from "react";
 import { useClickAway } from "react-use";
 import Dropdown from "../Dropdown";
-import { Container, OsIcon } from "./styled";
 
-import Terminal from "../../components/Terminal";
-import { useApps } from "../../hooks/appHook";
+import { useApps } from "../../hooks/useApp";
+
+import { Container, OsIcon } from "./styles";
+import { items } from "./helper";
 
 export default function TopBar() {
-  const { addApp } = useApps();
+  const apps = useApps();
 
   const [osDrop, setOsDrop] = useState(false);
 
@@ -29,29 +30,7 @@ export default function TopBar() {
             onClick={() => setOsDrop(!osDrop)}
           />
         }
-        items={[
-          {
-            id: "1",
-            node: <div>About the DuckOS</div>,
-          },
-          {
-            id: "2",
-            node: (
-              <div
-                onClick={() =>
-                  addApp({
-                    id: "terminal",
-                    title: "Terminal",
-                    node: Terminal,
-                    start: Date.now(),
-                  })
-                }
-              >
-                Open Terminal
-              </div>
-            ),
-          },
-        ]}
+        items={items(apps)}
       />
     </Container>
   );

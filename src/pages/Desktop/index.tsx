@@ -1,72 +1,24 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import { useWindowSize } from "react-use";
 
 import { Container, Content } from "../../styles/Home";
 
-//hooks
-import { useApps } from "../../hooks/appHook";
+// hooks
+import { useApps } from "../../hooks/useApp";
 
 // components
-import Text from "../../components/Text";
-import Title from "../../components/Title";
-import Card from "../../components/Card";
 import AppIcon from "../../components/AppIcon";
-
-// aplications
-import Clock from "../../components/Clock";
-import Application from "../../components/Application";
-import WellcomeCard from "../../components/WellcomeCard";
-import Terminal from "../../components/Terminal";
-import Navigator from "../../components/Navigator";
 import TopBar from "../../components/TopBar";
-import Calculator from "../../components/Calculator";
+import Application from "../../components/Application";
 
-const AppsOnDesktop = [
-  {
-    title: "Clock",
-    id: "clock",
-    icon: "icons/clock/Clock_Face.svg",
-    defaultPosition: {
-      x: 20,
-      y: 20,
-    },
-    node: Clock,
-  },
-  {
-    title: "Terminal",
-    id: "terminal",
-    icon: "/icons/applications/Terminal.png",
-    defaultPosition: {
-      x: 20,
-      y: 20,
-    },
-    node: Terminal,
-  },
-  {
-    title: "Duck's Boat Navigator",
-    id: "navigator",
-    icon: "/icons/applications/Brosen_windrose.svg",
-    defaultPosition: {
-      x: 20,
-      y: 20,
-    },
-    node: Navigator,
-  },
-  {
-    title: "Calculator",
-    id: "calculator",
-    icon: "/icons/applications/calculator.svg",
-    defaultPosition: {
-      x: 20,
-      y: 20,
-    },
-    node: Calculator,
-  },
-];
+// apps
+import { AppsOnDesktop } from "./helper";
+import Clock from "../../components/Clock";
+import WellcomeCard from "../../components/WellcomeCard";
 
 const Desktop = () => {
   const { apps, addApp } = useApps();
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
 
   useEffect(() => {
     addApp({
@@ -75,7 +27,6 @@ const Desktop = () => {
       title: "Clock",
       x: width - 400,
       y: 20,
-      start: Date.now(),
     });
   }, []);
 
@@ -101,20 +52,13 @@ const Desktop = () => {
           {apps.map((app) => (
             <Application
               key={app.id}
-              title={app.title}
-              id={app.id}
-              x={app.x}
-              y={app.y}
-              node={app.node}
+              {...app}
             />
           ))}
 
           {AppsOnDesktop.map((app) => (
             <AppIcon
               key={app.id}
-              title={app.title}
-              icon={app.icon}
-              defaultPosition={app.defaultPosition}
               isDraggable
               onDoubleClick={() =>
                 onDoubleClick({
@@ -123,6 +67,7 @@ const Desktop = () => {
                   node: app.node,
                 })
               }
+              {...app}
             />
           ))}
 

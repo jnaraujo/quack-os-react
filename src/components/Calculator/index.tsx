@@ -1,67 +1,22 @@
-import { ReactElement, ReactNode, useState } from "react";
+import { useState } from "react";
+import { CalculatorFunctions } from "./helper";
 import { Container } from "./styles";
+import { ICalculatorProps } from "./types";
 
-const Button = ({
-  text,
-  onClick,
-  className,
-}: {
-  text: string;
-  onClick?: (value: string) => void;
-  className?: string;
-}) => {
+const Button = ({ text, onClick, ...rest }: ICalculatorProps) => {
   return (
     <button
-      onClick={() => {
-        if (onClick) onClick(text);
-      }}
-      className={className}
+      onClick={() => onClick!(text)}
+      {...rest}
     >
       {text}
     </button>
   );
 };
-function isNumeric(value: string) {
-  return /^-?\d+$/.test(value);
-}
 
 export default function Calculator() {
   const [display, setDisplay] = useState("0");
-
-  const handleNumber = (number: string) => {
-    if (display.length > 10) return;
-
-    if (display === "0" || display === "Error") {
-      setDisplay(number);
-    } else {
-      setDisplay(display + number);
-    }
-  };
-
-  const handleClick = (value: string) => {
-    if (isNumeric(value) || "*/-+".includes(value)) {
-      return handleNumber(value);
-    }
-    if (value == ".") {
-      if (display.endsWith(".")) return;
-      return handleNumber(value);
-    }
-    if (value === "C") {
-      return setDisplay("0");
-    }
-    if (value === "=") {
-      let result = "";
-      try {
-        result = eval(display).toString();
-      } catch (error) {
-        result = "Error";
-      }
-      return setDisplay(result);
-    }
-    if (value == "<") {
-      return setDisplay(display.slice(0, -1));
-    }
-  };
+  const { handleClick } = new CalculatorFunctions(display, setDisplay);
 
   return (
     <Container>
