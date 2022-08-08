@@ -16,12 +16,12 @@ You can check it out [here](https://quack.jnaraujo.com/).
 
 > **Note:** This project is still in development, so it's not ready for production yet.
 
-## Screenshots
+## 🙏 Screenshots
 
 <div>
-  <img width="300px" src="./public/screenshots/boot.png">
-  <img width="300px" src="./public/screenshots/home_start.png">
-  <img width="600px"src="./public/screenshots/home.png">
+  <img width="49%" src="./public/screenshots/boot.png">
+  <img width="49%" src="./public/screenshots/home_start.png">
+  <img width="98%"src="./public/screenshots/home.png">
 
 </div>
 
@@ -32,7 +32,7 @@ You can check it out [here](https://quack.jnaraujo.com/).
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components](https://styled-components.com/)
 
-## Thanks
+## 🙏 Thanks
 
 ### Figma design
 
