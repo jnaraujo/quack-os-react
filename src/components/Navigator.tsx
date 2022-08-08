@@ -114,7 +114,7 @@ export default function Navigator(props: any) {
       ) : (
         <div className="background">
           <img
-            src="/public/brand/duck.png"
+            src="/brand/duck.png"
             width={200}
             height={200}
             alt="quack os logo"

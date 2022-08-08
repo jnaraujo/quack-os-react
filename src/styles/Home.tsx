@@ -9,12 +9,13 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
 
-  background-color: ${({ theme }) => theme.colors.red};
-
   /* background-image: url("/pattern/hatch/light.svg"); */
 
-  background-size: 5px 5px;
-  background-repeat: repeat;
+  background-color: ${({ theme }) => theme.colors.blue};
+  background-image: url("/brand/duck.png");
+  background-size: 200px 200px;
+  background-repeat: no-repeat;
+  background-position: center;
 
   .teste {
     width: 200px;
@@ -25,4 +26,8 @@ export const Content = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+
+  background-image: url("/pattern/dotted/lightAlt.svg");
+  background-size: 50px;
+  background-repeat: repeat;
 `;
