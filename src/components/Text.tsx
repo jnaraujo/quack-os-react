@@ -6,7 +6,6 @@ interface Props extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 const TextComponent = styled.p`
-  /* cursor: url("/icons/cursors/textCursor.svg"), default; */
   line-height: 1.5;
   margin: 0;
 `;
