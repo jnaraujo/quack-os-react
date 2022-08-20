@@ -22,7 +22,6 @@ You can check it out [here](https://quack.jnaraujo.com/).
   <img width="49%" src="./public/screenshots/boot.png">
   <img width="49%" src="./public/screenshots/home_start.png">
   <img width="98%"src="./public/screenshots/home.png">
-
 </div>
 
 ## 💻 Tech Stack
