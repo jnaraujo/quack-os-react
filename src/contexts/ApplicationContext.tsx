@@ -1,12 +1,9 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useMemo } from "react";
 import { ApplicationType, App } from "../types/ApplicationType";
 
-const ApplicationContext = createContext<ApplicationType>({
-  apps: [],
-  addApp: (app: App) => {},
-  removeApp: (id: string) => {},
-  clearApps: () => {},
-});
+const ApplicationContext = createContext<ApplicationType>(
+  {} as ApplicationType
+);
 
 function randomFixedInteger(length: number) {
   return Math.floor(
@@ -32,15 +29,18 @@ const ApplicationProvider = ({ children }: { children: ReactNode }) => {
     setApps([]);
   };
 
+  const value = useMemo(
+    () => ({
+      apps,
+      addApp,
+      removeApp,
+      clearApps,
+    }),
+    [apps]
+  );
+
   return (
-    <ApplicationContext.Provider
-      value={{
-        apps,
-        addApp,
-        removeApp,
-        clearApps,
-      }}
-    >
+    <ApplicationContext.Provider value={value}>
       {children}
     </ApplicationContext.Provider>
   );
