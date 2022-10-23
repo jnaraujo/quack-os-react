@@ -5,10 +5,7 @@ import { ICalculatorProps } from "./types";
 
 const Button = ({ text, onClick, ...rest }: ICalculatorProps) => {
   return (
-    <button
-      onClick={() => onClick!(text)}
-      {...rest}
-    >
+    <button onClick={() => onClick!(text)} {...rest}>
       {text}
     </button>
   );
@@ -17,6 +14,8 @@ const Button = ({ text, onClick, ...rest }: ICalculatorProps) => {
 export default function Calculator() {
   const [display, setDisplay] = useState("0");
   const { handleClick } = new CalculatorFunctions(display, setDisplay);
+
+  console.log("render");
 
   return (
     <Container>

@@ -1,8 +1,9 @@
-import { memo, Suspense, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Draggable from "react-draggable";
 import { useWindowSize } from "react-use";
 import { useApps } from "../../hooks/useApp";
 import Title from "../Title";
+import AppWrapper from "./AppWrapper";
 import { Content } from "./styles";
 import { IApplicationProps } from "./types";
 
@@ -71,9 +72,7 @@ function Application({ Node, ...props }: IApplicationProps) {
           <div
             className={`application ${loading === true ? "loading" : "loaded"}`}
           >
-            <Suspense fallback={<div>Loading...</div>}>
-              <Node appId={props.id} />
-            </Suspense>
+            <AppWrapper Node={Node} appID={props.id} />
           </div>
         </div>
       </Content>
@@ -81,4 +80,4 @@ function Application({ Node, ...props }: IApplicationProps) {
   );
 }
 
-export default memo(Application);
+export default Application;
