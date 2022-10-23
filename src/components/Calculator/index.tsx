@@ -15,8 +15,6 @@ export default function Calculator() {
   const [display, setDisplay] = useState("0");
   const { handleClick } = new CalculatorFunctions(display, setDisplay);
 
-  console.log("render");
-
   return (
     <Container>
       <div className="display">
