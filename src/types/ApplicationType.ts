@@ -1,6 +1,8 @@
+import type { LazyExoticComponent, ComponentType } from "react";
+
 interface App {
   id: string;
-  Node: ({}: { appId: string }) => JSX.Element;
+  Node: LazyExoticComponent<ComponentType<any>>;
   title: string;
 
   start?: number;
