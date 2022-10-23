@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { lazy, ReactNode, useEffect } from "react";
 import { useWindowSize } from "react-use";
 
 import { Container, Content } from "../../styles/Home";
@@ -13,7 +13,7 @@ import Application from "../../components/Application";
 
 // apps
 import { AppsOnDesktop } from "./helper";
-import Clock from "../../components/Clock";
+const Clock = lazy(() => import("../../components/Clock"));
 import WellcomeCard from "../../components/WellcomeCard";
 
 const Desktop = () => {
