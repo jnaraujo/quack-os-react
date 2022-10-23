@@ -19,7 +19,9 @@ export default defineConfig({
       },
     }),
     splitVendorChunkPlugin(),
-    visualizer({}),
+    visualizer({
+      filename: "stats.html",
+    }),
   ],
   build: {
     rollupOptions: {
