@@ -22,7 +22,7 @@ const Desktop = () => {
 
   useEffect(() => {
     addApp({
-      node: Clock,
+      Node: Clock,
       id: "clock",
       title: "Clock",
       x: width - 400,
@@ -33,10 +33,10 @@ const Desktop = () => {
   const onDoubleClick = (app: {
     title: string;
     id: string;
-    node: ReactNode | any;
+    Node: ReactNode | any;
   }) => {
     return addApp({
-      node: app.node,
+      Node: app.Node,
       id: app.id,
       title: app.title,
       start: Date.now(),
@@ -50,10 +50,7 @@ const Desktop = () => {
 
         <Content>
           {apps.map((app) => (
-            <Application
-              key={app.id}
-              {...app}
-            />
+            <Application key={app.id} {...app} />
           ))}
 
           {AppsOnDesktop.map((app) => (
@@ -64,7 +61,7 @@ const Desktop = () => {
                 onDoubleClick({
                   title: app.title,
                   id: app.id,
-                  node: app.node,
+                  Node: app.Node,
                 })
               }
               {...app}

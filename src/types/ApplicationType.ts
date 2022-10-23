@@ -1,6 +1,6 @@
 interface App {
   id: string;
-  node: ({}: { appId: string }) => JSX.Element;
+  Node: ({}: { appId: string }) => JSX.Element;
   title: string;
 
   start?: number;

@@ -1,9 +1,5 @@
-interface IApplicationProps {
-    node: ({ }: { appId: string }) => JSX.Element;
-    title: string;
-    id: string;
-    x?: number;
-    y?: number;
-}
+import { App } from "../../types/ApplicationType";
+
+interface IApplicationProps extends Omit<App, "start"> {}
 
 export type { IApplicationProps };
