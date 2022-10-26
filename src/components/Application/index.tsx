@@ -65,7 +65,9 @@ function Application({ Node, ...props }: IApplicationProps) {
           <Title className={`${loading === true ? "loading" : "loaded"}`}>
             {props.title}
           </Title>
-          <div className="close" onClick={close}></div>
+          <div className="close" onClick={close}>
+            <span>x</span>
+          </div>
         </div>
 
         <div className="back">

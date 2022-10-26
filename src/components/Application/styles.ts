@@ -57,10 +57,19 @@ const Content = styled.div`
     }
 
     .close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 28px !important;
       height: 28px !important;
       background-color: white;
       cursor: pointer;
+      color: black;
+      font-size: 2rem;
+      span {
+        position: absolute;
+        top: -15px;
+      }
     }
   }
 `;
