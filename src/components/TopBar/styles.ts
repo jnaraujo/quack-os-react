@@ -11,7 +11,7 @@ export const Container = styled.div`
   padding: 0 16px;
 `;
 
-export const OsIcon = styled.div<{
+export const OSIcon = styled.div<{
   isActive: boolean;
 }>`
   width: 50px;

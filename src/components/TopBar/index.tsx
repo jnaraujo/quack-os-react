@@ -4,7 +4,7 @@ import Dropdown from "../Dropdown";
 
 import { useApps } from "../../hooks/useApp";
 
-import { Container, OsIcon } from "./styles";
+import { Container, OSIcon } from "./styles";
 import { items } from "./helper";
 
 export default function TopBar() {
@@ -24,7 +24,7 @@ export default function TopBar() {
     <Container ref={containerRef}>
       <Dropdown
         trigger={
-          <OsIcon
+          <OSIcon
             ref={osIconRef}
             isActive={osDrop}
             onClick={() => setOsDrop(!osDrop)}
