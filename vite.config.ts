@@ -21,6 +21,7 @@ export default defineConfig({
     splitVendorChunkPlugin(),
     visualizer({
       filename: "stats.html",
+      gzipSize: true,
     }),
   ],
   build: {
