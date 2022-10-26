@@ -1,57 +1,55 @@
 import { useRef, useState } from "react";
-import Draggable from "react-draggable";
+import { useDragControls } from "framer-motion";
 import { useClickAway } from "react-use";
 import Title from "../Title";
 
-import { Content } from "./styles";
+import { ContentMotion } from "./styles";
 import { IAppIconProps } from "./types";
 
 export default function AppIcon({
-    onDoubleClicked,
-    onClick,
-    defaultPosition,
-    isDraggable,
-    title,
-    width = 80,
-    height = 80,
-    ...rest
+  onDoubleClick,
+  defaultPosition,
+  isDraggable,
+  title,
+  width = 80,
+  height = 80,
+  icon,
 }: IAppIconProps) {
-    const [clickCount, setClickCount] = useState(0);
-    const ref = useRef<HTMLDivElement>(null);
+  const [clickCount, setClickCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const controls = useDragControls();
 
-    const onClickContent = () => {
-        setClickCount((prev) => {
-            if (prev === 1) {
-                onDoubleClicked && onDoubleClicked();
-                return 0;
-            }
-            return 1;
-        });
-    };
-
-    useClickAway(ref, () => {
-        setClickCount(0);
+  const onClickContent = () => {
+    setClickCount((prev) => {
+      if (prev === 1) {
+        return 0;
+      }
+      return 1;
     });
+  };
 
-    return (
-        <>
-            <Draggable
-                disabled={isDraggable !== true}
-                defaultPosition={defaultPosition}
-                bounds="parent"
-            >
-                <Content
-                    ref={ref}
-                    onClick={onClickContent}
-                    clicked={clickCount === 1}
-                    width={width}
-                    height={height}
-                    {...rest}
-                >
-                    <div className="img" />
-                    <Title className="title">{title}</Title>
-                </Content>
-            </Draggable>
-        </>
-    );
+  useClickAway(ref, () => {
+    setClickCount(0);
+  });
+
+  return (
+    <>
+      <ContentMotion
+        drag={isDraggable}
+        initial={defaultPosition}
+        dragControls={controls}
+        dragMomentum={false}
+        ref={ref}
+        onClickCapture={onClickContent}
+        onDoubleClickCapture={onDoubleClick}
+        clicked={clickCount === 1}
+        icon={icon}
+        width={width}
+        height={height}
+      >
+        <div className="img" />
+        <Title className="title">{title}</Title>
+      </ContentMotion>
+    </>
+  );
 }

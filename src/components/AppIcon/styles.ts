@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const Content = styled.div<{
-    width: number;
-    icon: string;
-    height: number;
-    clicked: boolean;
+export const ContentMotion = styled(motion.div)<{
+  width: number;
+  icon: string;
+  height: number;
+  clicked: boolean;
 }>`
   width: fit-content;
   height: fit-content;
@@ -15,7 +16,7 @@ const Content = styled.div<{
   justify-content: center;
 
   background-color: ${(props) =>
-        props.clicked ? props.theme.colors.black : "transparent"};
+    props.clicked ? props.theme.colors.black : "transparent"};
   padding: 8px;
 
   .img {
@@ -38,5 +39,3 @@ const Content = styled.div<{
     color: ${(props) => (props.clicked ? props.theme.colors.white : "black")};
   }
 `;
-
-export { Content };
