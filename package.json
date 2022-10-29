@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^1.0.0",
@@ -21,6 +22,7 @@
     "react-router-dom": "^6.3.0",
     "react-use": "^17.4.0",
     "styled-components": "^5.3.5",
+    "vitest": "^0.24.3",
     "vote": "^0.0.1"
   },
   "devDependencies": {
