@@ -9,8 +9,8 @@ function WellcomeCard() {
   const { width, height } = useWindowSize();
   const [isOpen, setIsOpen] = useState(true);
 
-  const cardWidth = 350;
-  const cardHeight = 270;
+  const cardWidth = 400;
+  const cardHeight = 300;
 
   const handleClose = () => setIsOpen(false);
 
@@ -31,10 +31,12 @@ function WellcomeCard() {
       <Content>
         <Title>Wellcome to QuackOS!</Title>
         <Text>
-          Lorema ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+          This is a simple (and fake) operating system made with ReactJS and
+          Vite.
         </Text>
+        <Text>I hope you enjoy it!</Text>
         <button className="button" onClick={handleClose}>
-          Ok!
+          I will do it!
         </button>
       </Content>
     </Card>
