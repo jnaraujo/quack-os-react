@@ -12,7 +12,7 @@ import TopBar from "../../components/TopBar";
 import Application from "../../components/Application";
 
 // apps
-import { AppsOnDesktop } from "./helper";
+import { AppsOnDesktop, openApp } from "./helper";
 const Clock = lazy(() => import("../../components/Clock"));
 import WellcomeCard from "../../components/WellcomeCard";
 
@@ -35,6 +35,7 @@ const Desktop = () => {
     id: string;
     Node: ReactNode | any;
   }) => {
+    openApp(app.id);
     return addApp({
       Node: app.Node,
       id: app.id,

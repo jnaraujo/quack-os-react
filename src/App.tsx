@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ApplicationProvider from "./contexts/ApplicationContext";
 
 // Pages
-import Main from "./pages/Main";
+import Main from "./pages/Home";
 
 const App = () => {
   return (

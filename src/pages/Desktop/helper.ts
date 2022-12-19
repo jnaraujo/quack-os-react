@@ -49,3 +49,11 @@ const AppsOnDesktop = [
 ];
 
 export { AppsOnDesktop };
+
+export function openApp(id: string) {
+  const app = AppsOnDesktop.find((app) => app.id === id);
+  if (app) {
+    return app;
+  }
+  return null;
+}

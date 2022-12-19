@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import styled from "styled-components";
-import Desktop from "./Desktop";
-import Loading from "./Loading";
+import Desktop from "../Desktop";
+import Loading from "../Loading";
 
 const Container = styled.div`
   all: unset;
