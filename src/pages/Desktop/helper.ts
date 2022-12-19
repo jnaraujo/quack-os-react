@@ -1,9 +1,9 @@
 import React from "react";
 
-const Navigator = React.lazy(() => import("../../components/Navigator"));
-const Terminal = React.lazy(() => import("../../components/Terminal"));
-const Clock = React.lazy(() => import("../../components/Clock"));
-const Calculator = React.lazy(() => import("../../components/Calculator"));
+const Navigator = React.lazy(() => import("../../components/Apps/Navigator"));
+const Terminal = React.lazy(() => import("../../components/Apps/Terminal"));
+const Clock = React.lazy(() => import("../../components/Apps/Clock"));
+const Calculator = React.lazy(() => import("../../components/Apps/Calculator"));
 
 const AppsOnDesktop = [
   {

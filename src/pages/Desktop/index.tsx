@@ -13,7 +13,7 @@ import Application from "../../components/Application";
 
 // apps
 import { AppsOnDesktop, openApp } from "./helper";
-const Clock = lazy(() => import("../../components/Clock"));
+const Clock = lazy(() => import("../../components/Apps/Clock"));
 import WellcomeCard from "../../components/WellcomeCard";
 
 const Desktop = () => {

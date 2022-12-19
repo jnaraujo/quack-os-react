@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useWindowSize } from "react-use";
-import Card from "../Card";
+import Card from "../Apps/Card";
 import Text from "../Text";
 import Title from "../Title";
 import { Content } from "./styles";
