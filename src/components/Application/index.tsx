@@ -13,6 +13,7 @@ const cardHeight = 270;
 function Application({ Node, ...props }: IApplicationProps) {
   const controls = useDragControls();
   const [loading, setLoading] = useState(true);
+  const [drag, setDrag] = useState(false);
 
   const { removeApp } = useApps();
   const { width, height } = useWindowSize();
@@ -31,8 +32,13 @@ function Application({ Node, ...props }: IApplicationProps) {
   }, [props.x, props.y, width, height]);
 
   const move = (event: any) => {
+    setDrag(true);
     controls.start(event);
   };
+
+  const onDragEnd = () => {
+    setDrag(false);
+  }
 
   const close = () => {
     setTimeout(() => {
@@ -60,7 +66,8 @@ function Application({ Node, ...props }: IApplicationProps) {
         duration: 0.5,
         ease: [0.43, 0.13, 0.23, 0.96],
       }}
-      drag
+      drag={drag}
+      onDragEnd={onDragEnd}
       dragControls={controls}
       dragMomentum={false}
       style={{
