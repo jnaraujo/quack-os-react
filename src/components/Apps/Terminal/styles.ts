@@ -7,8 +7,7 @@ const Container = styled.div`
   .terminal {
     background-color: ${({ theme }) => theme.colors.white} !important;
     color: ${({ theme }) => theme.colors.black} !important;
-
-    /* overflow: hidden !important; */
+    border-radius: 0 !important;
 
     .text {
       color: ${({ theme }) => theme.colors.black} !important;
