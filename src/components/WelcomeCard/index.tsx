@@ -5,7 +5,7 @@ import Text from "../Text";
 import Title from "../Title";
 import { Content } from "./styles";
 
-function WellcomeCard() {
+function WelcomeCard() {
   const { width, height } = useWindowSize();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -23,13 +23,13 @@ function WellcomeCard() {
       width={cardWidth}
       height={cardHeight}
       isDraggable
-      className="wellcomeCard"
+      className="welcomeCard"
       style={{
         display: isOpen ? "inherit" : "none",
       }}
     >
       <Content>
-        <Title>Wellcome to QuackOS!</Title>
+        <Title>Welcome to QuackOS!</Title>
         <Text>
           This is a simple (and fake) operating system made with ReactJS and
           Vite.
@@ -43,4 +43,4 @@ function WellcomeCard() {
   );
 }
 
-export default WellcomeCard;
+export default WelcomeCard;

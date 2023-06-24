@@ -14,7 +14,7 @@ import Application from "../../components/Application";
 // apps
 import { AppsOnDesktop, openApp } from "./helper";
 const Clock = lazy(() => import("../../components/Apps/Clock"));
-import WellcomeCard from "../../components/WellcomeCard";
+import WelcomeCard from "../../components/WelcomeCard";
 
 const Desktop = () => {
   const { apps, addApp } = useApps();
@@ -69,7 +69,7 @@ const Desktop = () => {
             />
           ))}
 
-          <WellcomeCard />
+          <WelcomeCard />
         </Content>
       </Container>
     </>
