@@ -1,6 +1,7 @@
 import { lazy } from "react"
 import { ApplicationType } from "../../types/ApplicationType"
 const Terminal = lazy(() => import("../Apps/Terminal"))
+const WelcomeCard = lazy(() => import("../WelcomeCard"))
 
 const items = (useApps: ApplicationType) => {
   const { addApp } = useApps
@@ -8,12 +9,8 @@ const items = (useApps: ApplicationType) => {
   return [
     {
       id: "1",
-      Node: <div>About the DuckOS</div>,
-    },
-    {
-      id: "2",
       Node: (
-        <div
+        <button
           onClick={() =>
             addApp({
               id: "terminal",
@@ -24,7 +21,7 @@ const items = (useApps: ApplicationType) => {
           }
         >
           Open Terminal
-        </div>
+        </button>
       ),
     },
   ]
