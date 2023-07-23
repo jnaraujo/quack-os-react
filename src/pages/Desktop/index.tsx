@@ -1,8 +1,6 @@
 import { lazy, ReactNode, useEffect } from "react"
 import { useWindowSize } from "react-use"
 
-import { Container, Content } from "../../styles/Home"
-
 // hooks
 import { useApps } from "../../hooks/useApp"
 
@@ -46,10 +44,10 @@ const Desktop = () => {
 
   return (
     <>
-      <Container>
+      <main className="fixed h-screen w-screen overflow-hidden bg-blue-600 bg-duck bg-[length:200px_200px] bg-center bg-no-repeat">
         <TopBar />
 
-        <Content>
+        <div className="h-full w-full bg-dot-pattern bg-[length:50px] bg-repeat">
           {apps.map((app) => (
             <Application key={app.id} {...app} />
           ))}
@@ -70,8 +68,8 @@ const Desktop = () => {
           ))}
 
           <WelcomeCard />
-        </Content>
-      </Container>
+        </div>
+      </main>
     </>
   )
 }

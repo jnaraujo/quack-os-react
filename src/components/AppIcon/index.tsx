@@ -1,9 +1,9 @@
 import { useRef, useState } from "react"
 import { useDragControls } from "framer-motion"
 import { useClickAway } from "react-use"
-import Title from "../Title"
+import { motion } from "framer-motion"
+import clsx from "clsx"
 
-import { ContentMotion } from "./styles"
 import { IAppIconProps } from "./types"
 
 export default function AppIcon({
@@ -34,7 +34,7 @@ export default function AppIcon({
 
   return (
     <>
-      <ContentMotion
+      <motion.div
         drag={isDraggable}
         initial={defaultPosition}
         dragControls={controls}
@@ -42,14 +42,31 @@ export default function AppIcon({
         ref={ref}
         onClickCapture={onClickContent}
         onDoubleClickCapture={onDoubleClick}
-        clicked={clickCount === 1}
-        icon={icon}
-        width={width}
-        height={height}
+        className={clsx(
+          "flex h-fit w-fit flex-col items-center justify-center p-2",
+          {
+            "bg-black": clickCount === 1,
+          },
+        )}
       >
-        <div className="img" />
-        <Title className="title">{title}</Title>
-      </ContentMotion>
+        <div
+          style={{
+            width: width * 0.8,
+            height: width * 0.8,
+            backgroundImage: `url(${icon})`,
+          }}
+          className={clsx(`bg-contain bg-center bg-no-repeat`)}
+        />
+        <strong
+          style={{ width: width * 1.2 }}
+          className={clsx("break-words text-center", {
+            "text-white": clickCount === 1,
+            "text-black": clickCount === 0,
+          })}
+        >
+          {title}
+        </strong>
+      </motion.div>
     </>
   )
 }

@@ -9,6 +9,12 @@ export default {
         "2xl": "1400px",
       },
     },
+    extend: {
+      backgroundImage: {
+        duck: "url('/brand/duck.png')",
+        "dot-pattern": "url('/pattern/dotted/lightAlt.svg')",
+      },
+    },
   },
   plugins: [],
 }

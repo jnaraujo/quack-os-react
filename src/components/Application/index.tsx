@@ -2,9 +2,8 @@ import { useEffect, useMemo, useState } from "react"
 import { motion, useDragControls } from "framer-motion"
 import { useWindowSize } from "react-use"
 import { useApps } from "../../hooks/useApp"
-import Title from "../Title"
+import clsx from "clsx"
 import AppWrapper from "./AppWrapper"
-import { Content } from "./styles"
 import { IApplicationProps } from "./types"
 
 const cardWidth = 350
@@ -79,25 +78,40 @@ function Application({ Node, ...props }: IApplicationProps) {
         height: cardHeight,
       }}
     >
-      <Content>
-        <div className="title" onPointerDown={move}>
-          <div></div>
-          <Title className={`${loading === true ? "loading" : "loaded"}`}>
+      <div className="z-10 flex h-fit w-fit flex-col items-center justify-center overflow-hidden rounded-lg border-[6px] border-black">
+        <div
+          className="flex h-8 w-full items-center border-2 border-black bg-black text-white"
+          onPointerDown={move}
+        >
+          <strong
+            className={clsx("ml-auto block", {
+              "opacity-0": loading === true,
+            })}
+          >
             {props.title}
-          </Title>
-          <div className="close" onClick={close}>
-            <span>x</span>
+          </strong>
+
+          <div
+            className="ml-auto flex h-6 w-6 cursor-pointer items-center justify-center bg-white text-2xl text-black"
+            onClick={close}
+          >
+            x
           </div>
         </div>
 
-        <div className="back">
+        <div className={clsx(loading ? "bg-white" : "bg-black")}>
           <div
-            className={`application ${loading === true ? "loading" : "loaded"}`}
+            className={clsx(
+              "flex flex-col items-center justify-center overflow-hidden rounded-xl bg-white",
+              {
+                "opacity-0": loading === true,
+              },
+            )}
           >
             <AppWrapper Node={Node} appID={props.id} />
           </div>
         </div>
-      </Content>
+      </div>
     </motion.div>
   )
 }

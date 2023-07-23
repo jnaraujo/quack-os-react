@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react"
 
-import styled from "styled-components"
-import Desktop from "../Desktop"
-import Loading from "../Loading"
-
-const Container = styled.div`
-  all: unset;
-
-  &.hidden {
-    display: none;
-  }
-`
+import Desktop from "./Desktop"
+import Loading from "./Loading"
+import clsx from "clsx"
 
 export default function Main() {
   const [loading, setLoading] = useState(true)
@@ -25,9 +17,13 @@ export default function Main() {
   return (
     <>
       {loading && <Loading />}
-      <Container className={loading === true ? "hidden" : "show"}>
+      <div
+        className={clsx({
+          hidden: loading,
+        })}
+      >
         <Desktop />
-      </Container>
+      </div>
     </>
   )
 }
