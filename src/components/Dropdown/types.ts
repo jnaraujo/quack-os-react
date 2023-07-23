@@ -1,7 +1,9 @@
 import { ReactElement } from "react"
 
 interface IDropdownProps {
-  trigger: ReactElement
+  children: ReactElement
+  isOpen: boolean
+  close: () => void
   items: {
     id: string
     Node: ReactElement

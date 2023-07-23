@@ -3,29 +3,24 @@ import { useClickAway } from "react-use"
 import { IDropdownProps } from "./types"
 import clsx from "clsx"
 
-export default function Dropdown({ items, trigger }: IDropdownProps) {
-  const [isOpen, setIsOpen] = useState(false)
-
+export default function Dropdown({
+  items,
+  isOpen,
+  children,
+  close,
+}: IDropdownProps) {
   const triggerRef = useRef<HTMLDivElement>(null)
 
   useClickAway(triggerRef, () => {
-    setIsOpen(false)
+    close()
   })
-
-  const handleClick = () => {
-    setIsOpen(!isOpen)
-  }
-
   return (
     <div className="relative z-20 w-fit" ref={triggerRef}>
-      <button onClick={handleClick}>{trigger}</button>
+      {children}
       <div
-        className={clsx(
-          "mt-[-8px] flex w-fit min-w-[200px] flex-col bg-white",
-          {
-            hidden: !isOpen,
-          },
-        )}
+        className={clsx("flex w-fit min-w-[200px] flex-col bg-white", {
+          hidden: !isOpen,
+        })}
       >
         {items.map((item) => (
           <div
