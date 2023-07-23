@@ -1,9 +1,6 @@
 import { useState } from "react"
 import { useWindowSize } from "react-use"
-import Card from "../Apps/Card"
-import Text from "../Text"
-import Title from "../Title"
-import { Content } from "./styles"
+import Card from "./Apps/Card"
 
 function WelcomeCard() {
   const { width, height } = useWindowSize()
@@ -28,17 +25,17 @@ function WelcomeCard() {
         display: isOpen ? "inherit" : "none",
       }}
     >
-      <Content>
-        <Title>Welcome to QuackOS!</Title>
-        <Text>
+      <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-center">
+        <h1>Welcome to QuackOS!</h1>
+        <p>
           This is a simple (and fake) operating system made with ReactJS and
           Vite.
-        </Text>
-        <Text>I hope you enjoy it!</Text>
+        </p>
+        <p>I hope you enjoy it!</p>
         <button className="button" onClick={handleClose}>
           I will do it!
         </button>
-      </Content>
+      </div>
     </Card>
   )
 }
