@@ -44,7 +44,7 @@ const Desktop = () => {
 
   return (
     <>
-      <main className="fixed h-screen w-screen overflow-hidden bg-blue-600 bg-duck bg-[length:200px_200px] bg-center bg-no-repeat">
+      <main className="fixed h-screen w-screen overflow-hidden bg-blue-700 bg-duck bg-[length:200px_200px] bg-center bg-no-repeat">
         <TopBar />
 
         <div className="h-full w-full bg-dot-pattern bg-[length:50px] bg-repeat">
