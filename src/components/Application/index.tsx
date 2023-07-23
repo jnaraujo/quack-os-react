@@ -102,7 +102,7 @@ function Application({ Node, ...props }: IApplicationProps) {
         <div className={clsx(loading ? "bg-white" : "bg-black")}>
           <div
             className={clsx(
-              "flex flex-col items-center justify-center overflow-hidden rounded-xl bg-white",
+              "flex flex-col items-center justify-center overflow-hidden rounded-md bg-white",
               {
                 "opacity-0": loading === true,
               },
