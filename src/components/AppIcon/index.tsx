@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
-import { useDragControls } from "framer-motion";
-import { useClickAway } from "react-use";
-import Title from "../Title";
+import { useRef, useState } from "react"
+import { useDragControls } from "framer-motion"
+import { useClickAway } from "react-use"
+import Title from "../Title"
 
-import { ContentMotion } from "./styles";
-import { IAppIconProps } from "./types";
+import { ContentMotion } from "./styles"
+import { IAppIconProps } from "./types"
 
 export default function AppIcon({
   onDoubleClick,
@@ -15,22 +15,22 @@ export default function AppIcon({
   height = 80,
   icon,
 }: IAppIconProps) {
-  const [clickCount, setClickCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const controls = useDragControls();
+  const [clickCount, setClickCount] = useState(0)
+  const ref = useRef<HTMLDivElement>(null)
+  const controls = useDragControls()
 
   const onClickContent = () => {
     setClickCount((prev) => {
       if (prev === 1) {
-        return 0;
+        return 0
       }
-      return 1;
-    });
-  };
+      return 1
+    })
+  }
 
   useClickAway(ref, () => {
-    setClickCount(0);
-  });
+    setClickCount(0)
+  })
 
   return (
     <>
@@ -51,5 +51,5 @@ export default function AppIcon({
         <Title className="title">{title}</Title>
       </ContentMotion>
     </>
-  );
+  )
 }

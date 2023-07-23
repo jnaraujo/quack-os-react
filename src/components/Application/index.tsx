@@ -1,56 +1,56 @@
-import { useEffect, useMemo, useState } from "react";
-import { motion, useDragControls } from "framer-motion";
-import { useWindowSize } from "react-use";
-import { useApps } from "../../hooks/useApp";
-import Title from "../Title";
-import AppWrapper from "./AppWrapper";
-import { Content } from "./styles";
-import { IApplicationProps } from "./types";
+import { useEffect, useMemo, useState } from "react"
+import { motion, useDragControls } from "framer-motion"
+import { useWindowSize } from "react-use"
+import { useApps } from "../../hooks/useApp"
+import Title from "../Title"
+import AppWrapper from "./AppWrapper"
+import { Content } from "./styles"
+import { IApplicationProps } from "./types"
 
-const cardWidth = 350;
-const cardHeight = 270;
+const cardWidth = 350
+const cardHeight = 270
 
 function Application({ Node, ...props }: IApplicationProps) {
-  const controls = useDragControls();
-  const [loading, setLoading] = useState(true);
-  const [drag, setDrag] = useState(false);
+  const controls = useDragControls()
+  const [loading, setLoading] = useState(true)
+  const [drag, setDrag] = useState(false)
 
-  const { removeApp } = useApps();
-  const { width, height } = useWindowSize();
+  const { removeApp } = useApps()
+  const { width, height } = useWindowSize()
 
   const position = useMemo(() => {
     if (props.x && props.y) {
       return {
         x: props.x,
         y: props.y,
-      };
+      }
     }
     return {
       x: (width - cardWidth) / 2,
       y: (height - cardHeight) / 2,
-    };
-  }, [props.x, props.y, width, height]);
+    }
+  }, [props.x, props.y, width, height])
 
   const move = (event: any) => {
-    setDrag(true);
-    controls.start(event);
-  };
+    setDrag(true)
+    controls.start(event)
+  }
 
   const onDragEnd = () => {
-    setDrag(false);
+    setDrag(false)
   }
 
   const close = () => {
     setTimeout(() => {
-      removeApp(props.id);
-    }, 300);
-  };
+      removeApp(props.id)
+    }, 300)
+  }
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
+      setLoading(false)
+    }, 500)
+  }, [])
 
   return (
     <motion.div
@@ -99,7 +99,7 @@ function Application({ Node, ...props }: IApplicationProps) {
         </div>
       </Content>
     </motion.div>
-  );
+  )
 }
 
-export default Application;
+export default Application

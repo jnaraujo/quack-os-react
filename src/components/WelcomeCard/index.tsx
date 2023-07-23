@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { useWindowSize } from "react-use";
-import Card from "../Apps/Card";
-import Text from "../Text";
-import Title from "../Title";
-import { Content } from "./styles";
+import { useState } from "react"
+import { useWindowSize } from "react-use"
+import Card from "../Apps/Card"
+import Text from "../Text"
+import Title from "../Title"
+import { Content } from "./styles"
 
 function WelcomeCard() {
-  const { width, height } = useWindowSize();
-  const [isOpen, setIsOpen] = useState(true);
+  const { width, height } = useWindowSize()
+  const [isOpen, setIsOpen] = useState(true)
 
-  const cardWidth = 400;
-  const cardHeight = 300;
+  const cardWidth = 400
+  const cardHeight = 300
 
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => setIsOpen(false)
 
   return (
     <Card
@@ -40,7 +40,7 @@ function WelcomeCard() {
         </button>
       </Content>
     </Card>
-  );
+  )
 }
 
-export default WelcomeCard;
+export default WelcomeCard

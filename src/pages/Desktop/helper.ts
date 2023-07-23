@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
-const Navigator = React.lazy(() => import("../../components/Apps/Navigator"));
-const Terminal = React.lazy(() => import("../../components/Apps/Terminal"));
-const Clock = React.lazy(() => import("../../components/Apps/Clock"));
-const Calculator = React.lazy(() => import("../../components/Apps/Calculator"));
+const Navigator = React.lazy(() => import("../../components/Apps/Navigator"))
+const Terminal = React.lazy(() => import("../../components/Apps/Terminal"))
+const Clock = React.lazy(() => import("../../components/Apps/Clock"))
+const Calculator = React.lazy(() => import("../../components/Apps/Calculator"))
 
 const AppsOnDesktop = [
   {
@@ -46,14 +46,14 @@ const AppsOnDesktop = [
     },
     Node: Calculator,
   },
-];
+]
 
-export { AppsOnDesktop };
+export { AppsOnDesktop }
 
 export function openApp(id: string) {
-  const app = AppsOnDesktop.find((app) => app.id === id);
+  const app = AppsOnDesktop.find((app) => app.id === id)
   if (app) {
-    return app;
+    return app
   }
-  return null;
+  return null
 }

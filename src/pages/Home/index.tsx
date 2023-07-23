@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-import styled from "styled-components";
-import Desktop from "../Desktop";
-import Loading from "../Loading";
+import styled from "styled-components"
+import Desktop from "../Desktop"
+import Loading from "../Loading"
 
 const Container = styled.div`
   all: unset;
@@ -10,17 +10,17 @@ const Container = styled.div`
   &.hidden {
     display: none;
   }
-`;
+`
 
 export default function Main() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (process.env.NODE_ENV === "development") setLoading(false);
+    if (process.env.NODE_ENV === "development") setLoading(false)
     setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+      setLoading(false)
+    }, 3000)
+  }, [])
 
   return (
     <>
@@ -29,5 +29,5 @@ export default function Main() {
         <Desktop />
       </Container>
     </>
-  );
+  )
 }

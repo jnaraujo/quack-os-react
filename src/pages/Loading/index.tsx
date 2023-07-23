@@ -1,33 +1,33 @@
-import { useEffect, useState } from "react";
-import { useApps } from "../../hooks/useApp";
+import { useEffect, useState } from "react"
+import { useApps } from "../../hooks/useApp"
 
-import { Container } from "./styles";
+import { Container } from "./styles"
 
-const loadingChar = ["|", "/", "—", "\\"];
+const loadingChar = ["|", "/", "—", "\\"]
 
 export default function Loading() {
-  const [startedUp, setStartedUp] = useState(false);
-  const [loadingCount, setLoadingCount] = useState(0);
+  const [startedUp, setStartedUp] = useState(false)
+  const [loadingCount, setLoadingCount] = useState(0)
 
-  const { clearApps } = useApps();
+  const { clearApps } = useApps()
 
   useEffect(() => {
-    clearApps();
+    clearApps()
 
     setTimeout(() => {
-      setStartedUp(true);
-    }, 500);
+      setStartedUp(true)
+    }, 500)
     const interval = setInterval(() => {
       setLoadingCount((prev) => {
-        if (prev === 3) return 0;
-        return prev + 1;
-      });
-    }, 300);
+        if (prev === 3) return 0
+        return prev + 1
+      })
+    }, 300)
 
     return () => {
-      clearInterval(interval);
-    };
-  }, []);
+      clearInterval(interval)
+    }
+  }, [])
 
   return (
     <Container className={`${startedUp === false ? "startedUp" : ""}`}>
@@ -46,5 +46,5 @@ export default function Loading() {
         <h2>QuackOS is a registered trademark of Quack Corp.</h2>
       </div>
     </Container>
-  );
+  )
 }

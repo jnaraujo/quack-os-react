@@ -1,12 +1,12 @@
-import { NavigateFunction } from "react-router-dom";
-import { ApplicationType } from "../../../types/ApplicationType";
-import { Commands } from "./types";
+import { NavigateFunction } from "react-router-dom"
+import { ApplicationType } from "../../../types/ApplicationType"
+import { Commands } from "./types"
 
 const commands = (
   useApps: ApplicationType,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
 ): Commands => {
-  const { apps, removeApp } = useApps;
+  const { apps, removeApp } = useApps
 
   return {
     echo: {
@@ -24,7 +24,7 @@ const commands = (
               `${app.title} - ${app.id} - ${(
                 (Date.now() - app.start!) /
                 1000
-              ).toFixed(2)} sec(s)`
+              ).toFixed(2)} sec(s)`,
           )
           .join("\n"),
     },
@@ -32,24 +32,24 @@ const commands = (
       description: "Reboot the computer.",
       usage: "reboot",
       fn: () => {
-        navigate(0);
-        return "";
+        navigate(0)
+        return ""
       },
     },
     kill: {
       description: "Kill a process.",
       usage: "kill <process id>",
       fn: (...args: string[]) => {
-        const id = args.join("");
-        const app = apps.find((app) => app.id === id);
+        const id = args.join("")
+        const app = apps.find((app) => app.id === id)
         if (app) {
-          removeApp(id);
-          return "Process killed";
+          removeApp(id)
+          return "Process killed"
         }
-        return "Process not found";
+        return "Process not found"
       },
     },
-  };
-};
+  }
+}
 
-export { commands };
+export { commands }

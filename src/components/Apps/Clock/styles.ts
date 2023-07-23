@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Content = styled.div`
   display: flex;
@@ -14,6 +14,6 @@ const Content = styled.div`
   .clock {
     font-size: 2rem;
   }
-`;
+`
 
-export { Content };
+export { Content }

@@ -1,20 +1,20 @@
-import { useRef, useState } from "react";
-import { useClickAway } from "react-use";
-import { Container, ItemList } from "./styles";
-import { IDropdownProps } from "./types";
+import { useRef, useState } from "react"
+import { useClickAway } from "react-use"
+import { Container, ItemList } from "./styles"
+import { IDropdownProps } from "./types"
 
 export default function Dropdown({ items, trigger }: IDropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
-  const triggerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null)
 
   useClickAway(triggerRef, () => {
-    setIsOpen(false);
-  });
+    setIsOpen(false)
+  })
 
   const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   return (
     <Container ref={triggerRef}>
@@ -27,5 +27,5 @@ export default function Dropdown({ items, trigger }: IDropdownProps) {
         ))}
       </ItemList>
     </Container>
-  );
+  )
 }

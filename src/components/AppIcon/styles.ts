@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import styled from "styled-components"
+import { motion } from "framer-motion"
 
 export const ContentMotion = styled(motion.div)<{
-  width: number;
-  icon: string;
-  height: number;
-  clicked: boolean;
+  width: number
+  icon: string
+  height: number
+  clicked: boolean
 }>`
   width: fit-content;
   height: fit-content;
@@ -38,4 +38,4 @@ export const ContentMotion = styled(motion.div)<{
 
     color: ${(props) => (props.clicked ? props.theme.colors.white : "black")};
   }
-`;
+`

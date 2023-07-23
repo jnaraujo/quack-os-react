@@ -1,7 +1,7 @@
-import { defineConfig, splitVendorChunkPlugin } from "vite";
-import react from "@vitejs/plugin-react";
-import { visualizer } from "rollup-plugin-visualizer";
-import path from "path";
+import { defineConfig, splitVendorChunkPlugin } from "vite"
+import react from "@vitejs/plugin-react"
+import { visualizer } from "rollup-plugin-visualizer"
+import path from "path"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -29,7 +29,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "react": "preact/compat",
+      react: "preact/compat",
       "react-dom": "preact/compat",
     },
   },
@@ -42,4 +42,4 @@ export default defineConfig({
       },
     },
   },
-});
+})

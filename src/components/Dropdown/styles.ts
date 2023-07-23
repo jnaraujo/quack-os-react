@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Container = styled.div`
   all: unset;
@@ -21,10 +21,10 @@ const Container = styled.div`
       padding: 0;
     }
   }
-`;
+`
 
 const ItemList = styled.div<{
-    isOpen: boolean;
+  isOpen: boolean
 }>`
   z-index: 10;
   margin: 0;
@@ -43,6 +43,6 @@ const ItemList = styled.div<{
       color: ${({ theme }) => theme.colors.white};
     }
   }
-`;
+`
 
-export { Container, ItemList };
+export { Container, ItemList }

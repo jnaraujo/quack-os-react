@@ -1,1 +1,1 @@
-declare module 'react-console-emulator'
+declare module "react-console-emulator"

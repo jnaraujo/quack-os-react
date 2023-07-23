@@ -1,41 +1,41 @@
-import { useEffect, useState } from "react";
-import { Container } from "./styles";
+import { useEffect, useState } from "react"
+import { Container } from "./styles"
 
 function Navigator() {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("")
 
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<string[]>([])
 
   const backHistory = () => {
-    const newHistory = [...history];
-    newHistory.pop();
-    setHistory(newHistory);
-    setUrl(newHistory[newHistory.length - 1]);
-  };
+    const newHistory = [...history]
+    newHistory.pop()
+    setHistory(newHistory)
+    setUrl(newHistory[newHistory.length - 1])
+  }
 
   const addHistory = (url: string) => {
     if (!url) {
-      setHistory([]);
-      return;
+      setHistory([])
+      return
     }
-    if (history.at(-1) === url) return;
+    if (history.at(-1) === url) return
 
-    const newHistory = [...history];
+    const newHistory = [...history]
 
     if (url.startsWith("http://") || url.startsWith("https://")) {
-      newHistory.push(url);
+      newHistory.push(url)
     } else {
-      newHistory.push(`https://${url}`);
+      newHistory.push(`https://${url}`)
     }
-    setHistory(newHistory);
-  };
+    setHistory(newHistory)
+  }
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const url = e.currentTarget.value;
-      addHistory(url);
+      const url = e.currentTarget.value
+      addHistory(url)
     }
-  };
+  }
 
   return (
     <Container>
@@ -62,7 +62,7 @@ function Navigator() {
         </div>
       )}
     </Container>
-  );
+  )
 }
 
-export default Navigator;
+export default Navigator

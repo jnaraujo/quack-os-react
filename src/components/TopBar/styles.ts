@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
@@ -9,10 +9,10 @@ export const Container = styled.div`
   border-bottom: 4px solid ${({ theme }) => theme.colors.black};
 
   padding: 0 16px;
-`;
+`
 
 export const OSIcon = styled.div<{
-  isActive: boolean;
+  isActive: boolean
 }>`
   width: 50px;
   height: 40px;
@@ -27,4 +27,4 @@ export const OSIcon = styled.div<{
   &:hover {
     cursor: pointer;
   }
-`;
+`

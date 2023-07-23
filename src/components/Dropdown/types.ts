@@ -1,11 +1,11 @@
-import { ReactElement } from "react";
+import { ReactElement } from "react"
 
 interface IDropdownProps {
-  trigger: ReactElement;
+  trigger: ReactElement
   items: {
-    id: string;
-    Node: ReactElement;
-  }[];
+    id: string
+    Node: ReactElement
+  }[]
 }
 
-export type { IDropdownProps };
+export type { IDropdownProps }

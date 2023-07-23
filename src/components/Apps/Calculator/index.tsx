@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { CalculatorFunctions } from "./helper";
-import { Container } from "./styles";
-import { ICalculatorProps } from "./types";
+import { useState } from "react"
+import { CalculatorFunctions } from "./helper"
+import { Container } from "./styles"
+import { ICalculatorProps } from "./types"
 
 const Button = ({ text, onClick, ...rest }: ICalculatorProps) => {
   return (
     <button onClick={() => onClick!(text)} {...rest}>
       {text}
     </button>
-  );
-};
+  )
+}
 
 export default function Calculator() {
-  const [display, setDisplay] = useState("0");
-  const { handleClick } = new CalculatorFunctions(display, setDisplay);
+  const [display, setDisplay] = useState("0")
+  const { handleClick } = new CalculatorFunctions(display, setDisplay)
 
   return (
     <Container>
@@ -52,5 +52,5 @@ export default function Calculator() {
         </div>
       </div>
     </Container>
-  );
+  )
 }

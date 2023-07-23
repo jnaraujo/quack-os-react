@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 const CardComponent = styled.div<{
-    width: number;
-    height: number;
-    x: number;
-    y: number;
+  width: number
+  height: number
+  x: number
+  y: number
 }>`
   margin: 0;
   padding: 0;
@@ -27,6 +27,6 @@ const CardComponent = styled.div<{
     width: 100%;
     height: 100%;
   }
-`;
+`
 
-export { CardComponent };
+export { CardComponent }

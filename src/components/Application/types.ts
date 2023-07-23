@@ -1,5 +1,5 @@
-import { App } from "../../types/ApplicationType";
+import { App } from "../../types/ApplicationType"
 
 interface IApplicationProps extends Omit<App, "start"> {}
 
-export type { IApplicationProps };
+export type { IApplicationProps }

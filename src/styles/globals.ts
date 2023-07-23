@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
 const GlobalStyles = createGlobalStyle`
     @font-face {
@@ -126,6 +126,6 @@ const GlobalStyles = createGlobalStyle`
     h6 {
         font-size: 0.875rem;
     }
-`;
+`
 
-export { GlobalStyles };
+export { GlobalStyles }

@@ -1,10 +1,10 @@
-import React, { memo, Suspense } from "react";
+import React, { memo, Suspense } from "react"
 
 // import { Container } from './styles';
 
 interface IAppWrapperProps {
-  Node: React.LazyExoticComponent<React.ComponentType<any>>;
-  appID: string;
+  Node: React.LazyExoticComponent<React.ComponentType<any>>
+  appID: string
 }
 
 const AppWrapper: React.FC<IAppWrapperProps> = ({ Node, appID }) => {
@@ -12,7 +12,7 @@ const AppWrapper: React.FC<IAppWrapperProps> = ({ Node, appID }) => {
     <Suspense fallback={<div>Loading...</div>}>
       <Node appId={appID} />
     </Suspense>
-  );
-};
+  )
+}
 
-export default memo(AppWrapper);
+export default memo(AppWrapper)

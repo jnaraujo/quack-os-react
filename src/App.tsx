@@ -1,13 +1,13 @@
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./styles/globals";
-import { lightTheme } from "./styles/themes";
+import { ThemeProvider } from "styled-components"
+import { GlobalStyles } from "./styles/globals"
+import { lightTheme } from "./styles/themes"
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import ApplicationProvider from "./contexts/ApplicationContext";
+import ApplicationProvider from "./contexts/ApplicationContext"
 
 // Pages
-import Main from "./pages/Home";
+import Main from "./pages/Home"
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
         </ApplicationProvider>
       </BrowserRouter>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,9 +1,9 @@
-import { lazy } from "react";
-import { ApplicationType } from "../../types/ApplicationType";
-const Terminal = lazy(() => import("../Apps/Terminal"));
+import { lazy } from "react"
+import { ApplicationType } from "../../types/ApplicationType"
+const Terminal = lazy(() => import("../Apps/Terminal"))
 
 const items = (useApps: ApplicationType) => {
-  const { addApp } = useApps;
+  const { addApp } = useApps
 
   return [
     {
@@ -27,7 +27,7 @@ const items = (useApps: ApplicationType) => {
         </div>
       ),
     },
-  ];
-};
+  ]
+}
 
-export { items };
+export { items }

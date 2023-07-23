@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Content = styled.div`
   position: absolute;
@@ -72,6 +72,6 @@ const Content = styled.div`
       }
     }
   }
-`;
+`
 
-export { Content };
+export { Content }

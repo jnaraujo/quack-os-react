@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from "styled-components"
 
 const lightTheme: DefaultTheme = {
   colors: {
@@ -19,6 +19,6 @@ const lightTheme: DefaultTheme = {
     lg: "992px",
     xl: "1200px",
   },
-};
+}
 
-export { lightTheme };
+export { lightTheme }

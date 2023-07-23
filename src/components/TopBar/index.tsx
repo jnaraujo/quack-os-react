@@ -1,24 +1,24 @@
-import { useRef, useState } from "react";
-import { useClickAway } from "react-use";
-import Dropdown from "../Dropdown";
+import { useRef, useState } from "react"
+import { useClickAway } from "react-use"
+import Dropdown from "../Dropdown"
 
-import { useApps } from "../../hooks/useApp";
+import { useApps } from "../../hooks/useApp"
 
-import { Container, OSIcon } from "./styles";
-import { items } from "./helper";
+import { Container, OSIcon } from "./styles"
+import { items } from "./helper"
 
 export default function TopBar() {
-  const apps = useApps();
+  const apps = useApps()
 
-  const [osDrop, setOsDrop] = useState(false);
+  const [osDrop, setOsDrop] = useState(false)
 
-  const containerRef = useRef(null);
+  const containerRef = useRef(null)
 
-  const osIconRef = useRef<HTMLDivElement>(null);
+  const osIconRef = useRef<HTMLDivElement>(null)
 
   useClickAway(containerRef, () => {
-    setOsDrop(false);
-  });
+    setOsDrop(false)
+  })
 
   return (
     <Container ref={containerRef}>
@@ -27,11 +27,13 @@ export default function TopBar() {
           <OSIcon
             ref={osIconRef}
             isActive={osDrop}
-            onClick={() => setOsDrop(!osDrop)}
+            onClick={() => {
+              setOsDrop(!osDrop)
+            }}
           />
         }
         items={items(apps)}
       />
     </Container>
-  );
+  )
 }

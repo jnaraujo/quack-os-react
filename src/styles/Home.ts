@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const Container = styled.div`
   overflow: hidden;
@@ -20,7 +20,7 @@ export const Container = styled.div`
   .teste {
     width: 200px;
   }
-`;
+`
 
 export const Content = styled.div`
   width: 100%;
@@ -30,4 +30,4 @@ export const Content = styled.div`
   background-image: url("/pattern/dotted/lightAlt.svg");
   background-size: 50px;
   background-repeat: repeat;
-`;
+`
