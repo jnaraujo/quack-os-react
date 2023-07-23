@@ -14,7 +14,7 @@ const ApplicationProvider = ({ children }: { children: ReactNode }) => {
   const [apps, setApps] = useState<App[]>([])
 
   const addApp = (app: App) => {
-    app.id = app.id + "-" + randomFixedInteger(10)
+    app.id = randomFixedInteger(8).toString()
     app.start = Date.now()
     setApps([...apps, app])
   }

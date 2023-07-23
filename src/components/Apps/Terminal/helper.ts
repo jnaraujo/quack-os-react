@@ -17,8 +17,12 @@ const commands = (
     ps: {
       description: "List all processes.",
       usage: "ps",
-      fn: () =>
-        apps
+      fn: () => {
+        let text = "------------------\n"
+        text += "TITLE - ID - TIME\n"
+        text += "------------------\n"
+
+        text += apps
           .map(
             (app) =>
               `${app.title} - ${app.id} - ${(
@@ -26,7 +30,10 @@ const commands = (
                 1000
               ).toFixed(2)} sec(s)`,
           )
-          .join("\n"),
+          .join("\n")
+
+        return text
+      },
     },
     reboot: {
       description: "Reboot the computer.",
