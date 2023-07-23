@@ -30,7 +30,8 @@ class CalculatorFunctions {
     if (value === "=") {
       let result = ""
       try {
-        result = eval(this.display).toString()
+        const resultOfEval: number = eval(this.display)
+        result = resultOfEval.toFixed(3).toString()
       } catch (error) {
         result = "Error"
       }
