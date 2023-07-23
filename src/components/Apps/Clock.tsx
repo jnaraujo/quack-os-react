@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react"
-import Card from "../Card"
-import Title from "../../Text"
-import { Content } from "./styles"
 
 export default function Clock() {
   const [time, setTime] = useState({
@@ -32,10 +29,16 @@ export default function Clock() {
   }, [])
 
   return (
-    <Card width={cardWidth} height={cardHeight}>
-      <Content>
-        <Title className="clock">{`${time.hours} : ${time.minutes} : ${time.seconds}`}</Title>
-      </Content>
-    </Card>
+    <div
+      style={{
+        width: cardWidth,
+        height: cardHeight,
+      }}
+      className="flex items-center justify-center p-2"
+    >
+      <div className="flex h-full w-full items-center justify-center border-[6px] border-black">
+        <strong className="text-3xl">{`${time.hours} : ${time.minutes} : ${time.seconds}`}</strong>
+      </div>
+    </div>
   )
 }
