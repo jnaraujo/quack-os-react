@@ -80,7 +80,7 @@ function Application({ Node, ...props }: IApplicationProps) {
     >
       <div className="z-10 flex h-fit w-fit flex-col items-center justify-center overflow-hidden rounded-lg border-[6px] border-black">
         <div
-          className="flex h-8 w-full items-center border-2 border-black bg-black text-white"
+          className="z-30 flex h-8 w-full items-center border-2 border-black bg-black text-white"
           onPointerDown={move}
         >
           <strong
