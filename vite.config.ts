@@ -6,7 +6,6 @@ import alias from "@rollup/plugin-alias"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  test: {},
   plugins: [
     react({
       babel: {
