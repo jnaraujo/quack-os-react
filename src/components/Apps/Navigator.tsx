@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { Container } from "./styles"
+import { useState } from "react"
 
 function Navigator() {
   const [url, setUrl] = useState("")
@@ -37,21 +36,34 @@ function Navigator() {
     }
   }
 
+  const page = history[0]
+
   return (
-    <Container>
-      <div>
-        <button onClick={backHistory} />
+    <div className="flex h-[400px] w-[600px] flex-col">
+      <div className="flex h-6">
+        <button
+          onClick={backHistory}
+          style={{
+            backgroundImage: "url('icons/arrows/arrow/left.svg')",
+          }}
+          className="h-6 w-6 bg-contain bg-center bg-no-repeat active:shadow-[inset_-1px_-1px_6px_0px_rgba(0,0,0,0.4)]"
+        />
         <input
           type={"url"}
           value={url}
           onChange={(e: any) => setUrl(e.currentTarget.value)}
           onKeyDown={onKeyDown}
+          className="flex-1 border border-black"
         />
       </div>
-      {history[0] ? (
-        <iframe sandbox="allow-same-origin" src={history.at(-1)} />
+      {page ? (
+        <iframe
+          className="h-full"
+          sandbox="allow-same-origin"
+          src={history.at(-1)}
+        />
       ) : (
-        <div className="background">
+        <div className="flex h-full flex-col items-center justify-center gap-4">
           <img
             src="/brand/duck.png"
             width={200}
@@ -61,7 +73,7 @@ function Navigator() {
           <h2>Quack!</h2>
         </div>
       )}
-    </Container>
+    </div>
   )
 }
 
