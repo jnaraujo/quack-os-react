@@ -8,7 +8,7 @@ export default function Main() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (process.env.NODE_ENV === "development") setLoading(false)
+    // if (process.env.NODE_ENV === "development") setLoading(false)
     setTimeout(() => {
       setLoading(false)
     }, 3000)

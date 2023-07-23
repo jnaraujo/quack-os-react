@@ -5,17 +5,12 @@ import clsx from "clsx"
 const loadingChar = ["|", "/", "—", "\\"]
 
 export default function Loading() {
-  const [startedUp, setStartedUp] = useState(false)
   const [loadingCount, setLoadingCount] = useState(0)
 
   const { clearApps } = useApps()
 
   useEffect(() => {
     clearApps()
-
-    setTimeout(() => {
-      setStartedUp(true)
-    }, 500)
 
     const interval = setInterval(() => {
       setLoadingCount((prev) => {
@@ -33,9 +28,6 @@ export default function Loading() {
     <div
       className={clsx(
         "flex h-screen w-screen flex-col items-center justify-evenly bg-zinc-950 text-center text-white",
-        {
-          hidden: startedUp,
-        },
       )}
     >
       <div>
