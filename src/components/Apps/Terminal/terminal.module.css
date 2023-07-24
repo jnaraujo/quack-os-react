@@ -1,0 +1,25 @@
+.terminal {
+  background-color: theme("colors.white") !important;
+  color: theme("colors.black") !important;
+}
+
+.text {
+  color: theme("colors.black") !important;
+  font-family: "Fixedsys Excelsior", monospace !important;
+}
+
+.content, .promptLabel, .input {
+  color: theme("colors.black") !important;
+  font-size: theme("fontSize.xs") !important;
+}
+
+.inputArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  color: theme("colors.black") !important;
+  font-size: theme("fontSize.xs") !important;
+}

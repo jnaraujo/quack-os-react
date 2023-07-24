@@ -2,25 +2,24 @@ import ReactTerminal from "react-console-emulator"
 import { useNavigate } from "react-router-dom"
 import { useApps } from "../../../hooks/useApp"
 import { commands } from "./helper"
-import { Container } from "./styles"
+import styles from "./terminal.module.css"
 
 export default function Terminal() {
   const navigate = useNavigate()
   const apps = useApps()
 
   return (
-    <Container>
+    <div className="h-[300px] w-[500px] antialiased">
       <ReactTerminal
-        className="terminal"
+        className={styles.terminal}
         commands={commands(apps, navigate)}
         promptLabel={"user@duckos:~$"}
-        inputClassName="text"
-        contentClassName="content"
-        messageClassName="text"
-        promptLabelClassName="text"
-        inputAreaClassName="inputArea"
-        style={{}}
+        inputClassName={styles.input}
+        contentClassName={styles.content}
+        messageClassName={styles.message}
+        promptLabelClassName={styles.promptLabel}
+        inputAreaClassName={styles.inputArea}
       />
-    </Container>
+    </div>
   )
 }
