@@ -1,14 +1,14 @@
 import { defineConfig, splitVendorChunkPlugin } from "vite"
 import { visualizer } from "rollup-plugin-visualizer"
 import path from "path"
-import prefresh from "@prefresh/vite"
 import wasm from "vite-plugin-wasm"
+import react from "@vitejs/plugin-react"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    react(),
     wasm(),
-    prefresh(),
     splitVendorChunkPlugin(),
     visualizer({
       filename: "stats.html",

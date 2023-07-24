@@ -63,7 +63,9 @@ const Desktop = () => {
                   Node: app.Node,
                 })
               }
-              {...app}
+              defaultPosition={{ x: 10, y: 10 }}
+              icon={app.icon}
+              title={app.title}
             />
           ))}
 
