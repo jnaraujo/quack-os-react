@@ -40,7 +40,7 @@ export function usePython() {
       pyodide.current = await loadPy()
     }
 
-    const result: string = pyodide.current.runPython(`run_code('${code}')`)
+    const result: string = pyodide.current.runPython(`run_code('''${code}''')`)
     return result.trim()
   }
 
