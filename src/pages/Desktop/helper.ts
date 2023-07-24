@@ -19,7 +19,7 @@ const AppsOnDesktop = [
   {
     title: "Terminal",
     id: "terminal",
-    icon: "/icons/applications/Terminal.png",
+    icon: "/icons/applications/terminal.png",
     defaultPosition: {
       x: 20,
       y: 20,
