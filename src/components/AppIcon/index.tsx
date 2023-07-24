@@ -15,21 +15,37 @@ export default function AppIcon({
   height = 80,
   icon,
 }: IAppIconProps) {
+  const [showAppBg, setShowAppBg] = useState(false)
   const [clickCount, setClickCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
   const controls = useDragControls()
 
   const onClickContent = () => {
+    const isDoubleClick = clickCount === 1
+
+    if (isDoubleClick) {
+      onDoubleClick?.()
+    }
+
+    const timeout = setTimeout(() => {
+      setClickCount(0)
+    }, 300)
+
     setClickCount((prev) => {
       if (prev === 1) {
+        setShowAppBg(false)
         return 0
       }
+      setShowAppBg(true)
       return 1
     })
+
+    return () => clearTimeout(timeout)
   }
 
   useClickAway(ref, () => {
     setClickCount(0)
+    setShowAppBg(false)
   })
 
   return (
@@ -41,11 +57,10 @@ export default function AppIcon({
         dragMomentum={false}
         ref={ref}
         onClickCapture={onClickContent}
-        onDoubleClickCapture={onDoubleClick}
         className={clsx(
           "flex h-fit w-fit flex-col items-center justify-center p-2",
           {
-            "bg-black": clickCount === 1,
+            "bg-black": showAppBg,
           },
         )}
       >
@@ -60,8 +75,8 @@ export default function AppIcon({
         <strong
           style={{ width: width * 1.2 }}
           className={clsx("break-words text-center", {
-            "text-white": clickCount === 1,
-            "text-black": clickCount === 0,
+            "text-white": showAppBg,
+            "text-black": !showAppBg,
           })}
         >
           {title}
