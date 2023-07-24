@@ -55,6 +55,11 @@ const commands = (
         if (!pyodide) {
           pyodide = await loadPy()
         }
+
+        if (!args) {
+          return "Please enter a code to run. Example: python print('Hello World')"
+        }
+
         try {
           return pyodide.runPython(`run_code('${args.join(" ")}')`)
         } catch (error: any) {
