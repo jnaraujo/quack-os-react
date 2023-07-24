@@ -1,7 +1,6 @@
 import { lazy } from "react"
 import { ApplicationType } from "../../types/ApplicationType"
 const Terminal = lazy(() => import("../Apps/Terminal"))
-const WelcomeCard = lazy(() => import("../WelcomeCard"))
 
 const items = (useApps: ApplicationType) => {
   const { addApp } = useApps
