@@ -29,7 +29,7 @@ You can check it out [here](https://quack.jnaraujo.com/).
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Styled Components](https://styled-components.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## 🙏 Thanks
 
