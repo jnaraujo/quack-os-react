@@ -61,7 +61,13 @@ const commands = (
         }
 
         try {
-          return pyodide.runPython(`run_code('${args.join(" ")}')`)
+          const result = pyodide.runPython(`run_code('${args.join(" ")}')`)
+
+          if (!result.trim()) {
+            return "No output (try print something)"
+          }
+
+          return result
         } catch (error: any) {
           return error.message
         }
