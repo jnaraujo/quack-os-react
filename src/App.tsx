@@ -4,14 +4,17 @@ import ApplicationProvider from "./contexts/ApplicationContext"
 
 // Pages
 import Main from "./pages/Home"
+import { PythonProvider } from "./contexts/PythonContext"
 
 const App = () => {
   return (
     <BrowserRouter>
       <ApplicationProvider>
-        <Routes>
-          <Route path="/" element={<Main />} />
-        </Routes>
+        <PythonProvider>
+          <Routes>
+            <Route path="/" element={<Main />} />
+          </Routes>
+        </PythonProvider>
       </ApplicationProvider>
     </BrowserRouter>
   )

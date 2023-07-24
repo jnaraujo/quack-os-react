@@ -1,4 +1,4 @@
-import { usePython } from "../../hooks/usePython"
+import { usePython } from "../../contexts/PythonContext"
 import Button from "../ui/Button"
 import { useState } from "react"
 
