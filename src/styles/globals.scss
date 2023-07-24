@@ -42,7 +42,7 @@
   }
   //up
   ::-webkit-scrollbar-button:single-button:vertical:decrement {
-      background-image: url("icons/arrows/arrow/up.svg");
+      background-image: url("../../public/icons/arrows/arrow/up.svg");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -53,7 +53,7 @@
   }
   /* Down */
   ::-webkit-scrollbar-button:single-button:vertical:increment {
-      background-image: url("icons/arrows/arrow/down.svg");
+      background-image: url("../../public/icons/arrows/arrow/down.svg");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
