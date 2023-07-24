@@ -1,25 +1,12 @@
 import { defineConfig, splitVendorChunkPlugin } from "vite"
-import react from "@vitejs/plugin-react"
 import { visualizer } from "rollup-plugin-visualizer"
 import path from "path"
-import alias from "@rollup/plugin-alias"
+import prefresh from "@prefresh/vite"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          [
-            "babel-plugin-styled-components",
-            {
-              displayName: true,
-              fileName: false,
-            },
-          ],
-        ],
-      },
-    }),
+    prefresh(),
     splitVendorChunkPlugin(),
     visualizer({
       filename: "stats.html",
@@ -29,25 +16,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          react: ["react", "react-dom"],
-        },
-      },
-      plugins: [
-        alias({
-          entries: [
-            { find: "react", replacement: "preact/compat" },
-            { find: "react-dom/test-utils", replacement: "preact/test-utils" },
-            { find: "react-dom", replacement: "preact/compat" },
-            { find: "react/jsx-runtime", replacement: "preact/jsx-runtime" },
-          ],
-        }),
-      ],
+      react: "preact/compat",
+      "react-dom": "preact/compat",
     },
   },
 })
