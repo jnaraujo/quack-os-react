@@ -17,22 +17,16 @@ const commands = (
     python: {
       description: "Run a python code.",
       usage: "python <code>",
-      fn: async (...args: string[]) => {
-        if (args.length === 0) {
-          return "Please enter a code to run. Example: python print('Hello World')"
-        }
-
-        try {
-          const result = await runCode(args.join(" "))
-
-          if (!result) {
-            return "No output (try print something)"
+      fn: (...args: string[]) => {
+        return new Promise((resolve) => {
+          if (args.length === 0) {
+            return "Please enter a code to run. Example: python print('Hello World')"
           }
 
-          return result
-        } catch (error: any) {
-          return error.message
-        }
+          runCode(args.join(" "), (result: string) => {
+            resolve(result)
+          })
+        })
       },
     },
     ps: {

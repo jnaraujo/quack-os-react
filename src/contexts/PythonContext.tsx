@@ -1,7 +1,12 @@
-import { createContext, useContext, useRef } from "react"
+import { createContext, useContext, useEffect, useRef } from "react"
 
 interface IPythonContext {
-  runCode: (code: string) => Promise<string>
+  runCode: (
+    code: string,
+    id: string,
+    onResult: (result: string) => void,
+  ) => void
+  deleteCallback: (id: string) => void
 }
 
 const PythonContext = createContext({} as IPythonContext)
@@ -9,54 +14,56 @@ const PythonContext = createContext({} as IPythonContext)
 export const usePython = () => useContext(PythonContext)
 
 export function PythonProvider({ children }: { children: React.ReactNode }) {
-  const pyodide = useRef<any>(null)
+  const worker = useRef<Worker | null>(null)
+  const callbacks = useRef<Record<string, (result: string) => void>>({})
+  const autoUnload = useRef<NodeJS.Timeout | null>(null)
 
-  async function loadPyodide() {
-    if (pyodide.current) {
-      return
+  function runCode(
+    code: string,
+    id: string,
+    onResult?: (result: string) => void,
+  ) {
+    if (autoUnload.current) {
+      clearTimeout(autoUnload.current)
+      autoUnload.current = null
     }
-    const { loadPyodide } = await import("pyodide")
 
-    const py = await loadPyodide({
-      indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/",
-    })
+    if (!worker.current) {
+      console.log("Creating new worker")
+      worker.current = new Worker("/python.worker.js")
 
-    return py
+      worker.current.onmessage = (e) => {
+        const { id, stdout } = e.data
+        if (callbacks.current[id]) {
+          callbacks.current[id](stdout)
+        }
+      }
+    }
+
+    if (onResult) {
+      callbacks.current[id] = onResult
+    }
+
+    worker.current.postMessage({ id, code })
   }
 
-  async function runCode(code: string) {
-    if (!pyodide.current) {
-      pyodide.current = await loadPyodide()
+  function deleteCallback(id: string) {
+    delete callbacks.current[id]
+
+    if (!Object.keys(callbacks.current).length) {
+      console.log("No callbacks left, unloading worker in 5 seconds")
+
+      autoUnload.current = setTimeout(() => {
+        if (worker.current) {
+          worker.current.terminate()
+          worker.current = null
+        }
+      }, 5000)
     }
-
-    const setup_code = `
-    import sys, io, traceback
-    namespace = {}  # use separate namespace to hide run_code, modules, etc.
-    def run_code(code):
-      """run specified code and return stdout and stderr"""
-      out = io.StringIO()
-      oldout = sys.stdout
-      olderr = sys.stderr
-      sys.stdout = sys.stderr = out
-      try:
-          # change next line to exec(code, {}) if you want to clear vars each time
-          exec(code, namespace)
-      except:
-          traceback.print_exc()
-    
-      sys.stdout = oldout
-      sys.stderr = olderr
-      return out.getvalue()
-    `
-
-    pyodide.current.runPython(setup_code)
-    const result: string = pyodide.current.runPython(`run_code('''${code}''')`)
-
-    return result.trim()
   }
 
   return (
-    <PythonContext.Provider value={{ runCode }}>
+    <PythonContext.Provider value={{ runCode, deleteCallback }}>
       {children}
     </PythonContext.Provider>
   )

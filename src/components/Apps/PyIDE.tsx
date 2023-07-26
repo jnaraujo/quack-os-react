@@ -1,27 +1,33 @@
 import { usePython } from "../../contexts/PythonContext"
 import Button from "../ui/Button"
-import { useState } from "react"
+import { useEffect, useId, useState } from "react"
 
 export default function PyIDE() {
-  const { runCode } = usePython()
+  const { runCode, deleteCallback } = usePython()
   const [output, setOutput] = useState("")
   const [code, setCode] = useState(`import math
 
 print("Hello, world!")
 print("Square root of 2 is", math.sqrt(2))`)
+  const python_id = "pyide-" + useId()
 
   async function handleRun() {
     setOutput("Running...")
 
     const input = code.trim()
+
     let result = ""
-    try {
-      result = await runCode(input)
-    } catch (error: any) {
-      result = error.message
-    }
-    setOutput(result)
+    runCode(input, python_id, (output) => {
+      result += output + "\n"
+      setOutput(result)
+    })
   }
+
+  useEffect(() => {
+    return () => {
+      deleteCallback(python_id)
+    }
+  }, [])
 
   function handleOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setCode(e.target.value)
