@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx . --fix"
   },
   "dependencies": {
+    "@uiw/react-textarea-code-editor": "^2.1.7",
     "@vitejs/plugin-react": "^4.0.3",
     "clsx": "^2.0.0",
     "framer-motion": "^7.6.1",

@@ -1,6 +1,7 @@
 import { usePython } from "../../contexts/PythonContext"
 import Button from "../ui/Button"
 import { useEffect, useId, useState } from "react"
+import CodeEditor from "@uiw/react-textarea-code-editor"
 
 export default function PyIDE() {
   const { runCode, deleteCallback } = usePython()
@@ -40,15 +41,15 @@ print("Square root of 2 is", math.sqrt(2))`)
           Run
         </Button>
       </div>
-      <textarea
-        className="w-full flex-1 resize-none bg-gray-200 p-2 text-sm"
-        onChange={handleOnChange}
-        defaultValue={code}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
-        spellCheck="false"
-      />
+      <div className="flex-1 overflow-auto">
+        <CodeEditor
+          className="!min-h-full !overflow-hidden !bg-gray-200 !text-sm"
+          onChange={handleOnChange}
+          data-color-mode="light"
+          language="python"
+          value={code}
+        />
+      </div>
       <div className="h-24 w-full overflow-auto bg-gray-300 p-2 text-sm">
         {output.split("\n").map((line, i) => (
           <div key={i}>{line}</div>
