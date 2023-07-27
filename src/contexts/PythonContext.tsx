@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef } from "react"
+import { createContext, useContext, useRef } from "react"
 
 interface IPythonContext {
   runCode: (
