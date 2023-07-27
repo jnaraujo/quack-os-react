@@ -23,7 +23,7 @@ export default function TopBar() {
 
   return (
     <div
-      className="z-20 h-9 w-full border-b-[4px] border-black bg-white px-4"
+      className="relative z-[9999] h-9 w-full border-b-[4px] border-black bg-white px-4"
       ref={containerRef}
     >
       <Dropdown
