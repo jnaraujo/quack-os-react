@@ -1,4 +1,4 @@
-import { defineConfig, splitVendorChunkPlugin } from "vite"
+import { defineConfig } from "vite"
 import { visualizer } from "rollup-plugin-visualizer"
 import path from "path"
 import wasm from "vite-plugin-wasm"
@@ -9,12 +9,22 @@ export default defineConfig({
   plugins: [
     react(),
     wasm(),
-    splitVendorChunkPlugin(),
     visualizer({
       filename: "stats.html",
       gzipSize: true,
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          rehype: ["rehype"],
+          unified: ["unified"],
+          "rehype-prism-plus": ["rehype-prism-plus"],
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
