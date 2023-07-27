@@ -48,6 +48,8 @@ export function PythonProvider({ children }: { children: React.ReactNode }) {
   }
 
   function deleteCallback(id: string) {
+    if (!callbacks.current[id]) return
+
     delete callbacks.current[id]
 
     if (!Object.keys(callbacks.current).length) {
