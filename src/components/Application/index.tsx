@@ -1,48 +1,37 @@
 import { useEffect, useMemo, useState } from "react"
-import { motion, useDragControls } from "framer-motion"
 import { useWindowSize } from "react-use"
 import { useApps } from "../../hooks/useApp"
 import clsx from "clsx"
 import AppWrapper from "./AppWrapper"
 import { IApplicationProps } from "./types"
-
-const cardWidth = 350
-const cardHeight = 270
+import { WindowProvider } from "../../contexts/WindowContext"
+import { useWindowContext } from "./helper"
+import Draggable from "./Draggable"
 
 function Application({ Node, ...props }: IApplicationProps) {
-  const controls = useDragControls()
-  const [loading, setLoading] = useState(true)
-  const [drag, setDrag] = useState(false)
-
   const { removeApp } = useApps()
-  const { width, height } = useWindowSize()
 
-  const position = useMemo(() => {
-    if (props.x && props.y) {
-      return {
-        x: props.x,
-        y: props.y,
-      }
-    }
-    return {
-      x: (width - cardWidth) / 2,
-      y: (height - cardHeight) / 2,
-    }
-  }, [props.x, props.y, width, height])
+  const { isResizable, setIsResizable, initialSize, setInitialSize } =
+    useWindowContext()
+
+  const [drag, setDrag] = useState(false)
+  const [mouse, setMouse] = useState<MouseEvent>()
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const move = (event: any) => {
+    setMouse(event)
     setDrag(true)
-    controls.start(event)
-  }
-
-  const onDragEnd = () => {
-    setDrag(false)
   }
 
   const close = () => {
     setTimeout(() => {
       removeApp(props.id)
     }, 300)
+  }
+
+  function handleFullscreen() {
+    setIsFullscreen((prev) => !prev)
   }
 
   useEffect(() => {
@@ -52,35 +41,26 @@ function Application({ Node, ...props }: IApplicationProps) {
   }, [])
 
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        scale: 0.1,
-      }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-      }}
-      transition={{
-        duration: 0.5,
-        ease: [0.43, 0.13, 0.23, 0.96],
-      }}
-      drag={drag}
-      onDragEnd={onDragEnd}
-      dragControls={controls}
-      dragMomentum={false}
-      style={{
-        position: "absolute",
-        zIndex: 9999,
-        x: position.x,
-        y: position.y,
-        width: cardWidth,
-        height: cardHeight,
-      }}
+    <Draggable
+      drag={!isFullscreen && drag}
+      mouse={mouse}
+      setDrag={setDrag}
+      x={props.x}
+      y={props.y}
+      isFullscreen={isFullscreen}
+      initialHeight={initialSize.height}
+      initialWidth={initialSize.width}
     >
-      <div className="z-10 flex h-fit w-fit flex-col items-center justify-center overflow-hidden rounded-lg border-[6px] border-black">
+      <div
+        className={clsx(
+          "z-10 flex h-full w-full flex-col items-center overflow-hidden rounded-lg border-[6px] border-black",
+          {
+            "h-screen w-screen": isFullscreen,
+          },
+        )}
+      >
         <div
-          className="z-30 flex h-8 w-full items-center border-2 border-black bg-black text-white"
+          className="z-30 mt-0 flex h-8 w-full select-none items-center border-2 border-black bg-black text-white"
           onPointerDown={move}
         >
           <strong
@@ -91,28 +71,44 @@ function Application({ Node, ...props }: IApplicationProps) {
             {props.title}
           </strong>
 
-          <div
-            className="ml-auto flex h-6 w-6 cursor-pointer items-center justify-center bg-white text-2xl text-black"
-            onClick={close}
-          >
-            x
+          <div className="ml-auto flex w-fit gap-2">
+            {isResizable && (
+              <button
+                onClick={handleFullscreen}
+                className="flex h-6 w-6 items-center justify-center bg-white text-2xl text-black"
+              >
+                =
+              </button>
+            )}
+            <button
+              className="flex h-6 w-6 items-center justify-center bg-white text-2xl text-black"
+              onClick={close}
+            >
+              x
+            </button>
           </div>
         </div>
 
-        <div className={clsx(loading ? "bg-white" : "bg-black")}>
-          <div
-            className={clsx(
-              "flex flex-col items-center justify-center overflow-hidden rounded-md bg-white",
-              {
-                "opacity-0": loading === true,
-              },
-            )}
+        <div
+          className={clsx(
+            "flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-md bg-white",
+            {
+              "opacity-0": loading === true,
+            },
+          )}
+        >
+          <WindowProvider
+            appId={props.id}
+            setIsResizable={setIsResizable}
+            isFullscreen={isFullscreen}
+            initialSize={initialSize}
+            setInitialSize={setInitialSize}
           >
             <AppWrapper Node={Node} appID={props.id} />
-          </div>
+          </WindowProvider>
         </div>
       </div>
-    </motion.div>
+    </Draggable>
   )
 }
 

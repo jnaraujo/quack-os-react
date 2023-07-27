@@ -2,8 +2,10 @@ import { usePython } from "../../contexts/PythonContext"
 import Button from "../ui/Button"
 import { useEffect, useId, useState } from "react"
 import CodeEditor from "@uiw/react-textarea-code-editor"
+import { useWindow } from "../../contexts/WindowContext"
 
 export default function PyIDE() {
+  const { setIsResizable, setInitialSize } = useWindow()
   const { runCode, deleteCallback } = usePython()
   const [output, setOutput] = useState("")
   const [code, setCode] = useState(`import math
@@ -25,6 +27,11 @@ print("Square root of 2 is", math.sqrt(2))`)
   }
 
   useEffect(() => {
+    setIsResizable(true)
+    setInitialSize({
+      width: 550,
+      height: 380,
+    })
     return () => {
       deleteCallback(python_id)
     }
@@ -35,7 +42,7 @@ print("Square root of 2 is", math.sqrt(2))`)
   }
 
   return (
-    <div className="flex h-[380px] w-[500px] flex-col">
+    <div className="flex h-full w-full flex-col">
       <div className="flex h-6 items-center bg-gray-300">
         <Button onClick={handleRun} className="h-full">
           Run
@@ -50,7 +57,7 @@ print("Square root of 2 is", math.sqrt(2))`)
           value={code}
         />
       </div>
-      <div className="h-24 w-full overflow-auto bg-gray-300 p-2 text-sm">
+      <div className="h-[25%] w-full overflow-auto bg-gray-300 p-2 text-sm">
         {output.split("\n").map((line, i) => (
           <div key={i}>{line}</div>
         ))}
