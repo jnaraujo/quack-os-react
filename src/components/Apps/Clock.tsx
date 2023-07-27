@@ -9,9 +9,6 @@ export default function Clock() {
     seconds: "00",
   })
 
-  const cardWidth = 350
-  const cardHeight = 150
-
   const updateClock = () => {
     const date = new Date()
     setTime({
@@ -23,8 +20,8 @@ export default function Clock() {
 
   useEffect(() => {
     setInitialSize({
-      width: cardWidth + 30,
-      height: cardHeight + 80,
+      width: 380,
+      height: 200,
     })
     updateClock()
     const interval = setInterval(updateClock, 1000)
@@ -35,13 +32,7 @@ export default function Clock() {
   }, [])
 
   return (
-    <div
-      style={{
-        width: cardWidth,
-        height: cardHeight,
-      }}
-      className="flex items-center justify-center p-2"
-    >
+    <div className="flex h-full w-full items-center justify-center p-2">
       <div className="flex h-full w-full items-center justify-center border-[6px] border-black">
         <strong className="text-3xl">{`${time.hours} : ${time.minutes} : ${time.seconds}`}</strong>
       </div>
