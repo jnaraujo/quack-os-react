@@ -56,8 +56,6 @@ export default function Draggable({
     }
   }, [x, y, width, height])
 
-  console.log(initialPosition)
-
   return (
     <motion.div
       initial={{
