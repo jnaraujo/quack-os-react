@@ -81,8 +81,8 @@ export default function Draggable({
       style={{
         position: "absolute",
         zIndex: 25,
-        width: initialWidth,
-        height: initialHeight,
+        width: isFullscreen ? "100%" : "fit-content",
+        height: isFullscreen ? "100%" : "fit-content",
       }}
     >
       {children}

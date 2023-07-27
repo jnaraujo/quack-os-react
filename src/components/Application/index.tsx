@@ -52,11 +52,12 @@ function Application({ Node, ...props }: IApplicationProps) {
       initialWidth={initialSize.width}
     >
       <div
+        style={{
+          width: isFullscreen ? "100vw" : initialSize.width,
+          height: isFullscreen ? "calc(100vh - 40px)" : initialSize.height,
+        }}
         className={clsx(
-          "z-10 flex h-full w-full flex-col items-center rounded-lg border-[6px] border-black",
-          {
-            "h-[calc(100vh_-_40px)] w-screen": isFullscreen,
-          },
+          "z-10 flex flex-col items-center rounded-lg border-[6px] border-black",
         )}
       >
         <div
