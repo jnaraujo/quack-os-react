@@ -1,13 +1,12 @@
 import { defineConfig } from "vite"
 import { visualizer } from "rollup-plugin-visualizer"
-import path from "path"
 import wasm from "vite-plugin-wasm"
-import react from "@vitejs/plugin-react"
+import prefresh from "@prefresh/vite"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    prefresh(),
     wasm(),
     visualizer({
       filename: "stats.html",
@@ -27,9 +26,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
       react: "preact/compat",
-      "react-dom": "preact/compat",
     },
   },
 })
