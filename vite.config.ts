@@ -13,17 +13,6 @@ export default defineConfig({
       gzipSize: true,
     }),
   ],
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          rehype: ["rehype"],
-          unified: ["unified"],
-          "rehype-prism-plus": ["rehype-prism-plus"],
-        },
-      },
-    },
-  },
   resolve: {
     alias: {
       react: "preact/compat",
