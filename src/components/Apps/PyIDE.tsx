@@ -1,8 +1,8 @@
 import { usePython } from "../../contexts/PythonContext"
 import Button from "../ui/Button"
-import { useEffect, useId, useState } from "react"
-import CodeEditor from "@uiw/react-textarea-code-editor"
+import { useEffect, useId, useState, lazy } from "react"
 import { useWindow } from "../../contexts/WindowContext"
+const CodeEditor = lazy(() => import("@uiw/react-textarea-code-editor"))
 
 export default function PyIDE() {
   const { setIsResizable, setInitialSize } = useWindow()
