@@ -53,9 +53,9 @@ function Application({ Node, ...props }: IApplicationProps) {
     >
       <div
         className={clsx(
-          "z-10 flex h-full w-full flex-col items-center overflow-hidden rounded-lg border-[6px] border-black",
+          "z-10 flex h-full w-full flex-col items-center rounded-lg border-[6px] border-black",
           {
-            "h-screen w-screen": isFullscreen,
+            "h-[calc(100vh_-_40px)] w-screen": isFullscreen,
           },
         )}
       >

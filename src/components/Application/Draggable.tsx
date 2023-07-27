@@ -82,10 +82,9 @@ export default function Draggable({
       dragMomentum={false}
       style={{
         position: "absolute",
-        zIndex: 9999,
-
-        width: isFullscreen ? "100vw" : initialWidth,
-        height: isFullscreen ? "100vh" : initialHeight,
+        zIndex: 25,
+        width: initialWidth,
+        height: initialHeight,
       }}
     >
       {children}
