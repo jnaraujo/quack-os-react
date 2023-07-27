@@ -2,16 +2,14 @@ import { usePython } from "../../contexts/PythonContext"
 import Button from "../ui/Button"
 import { useEffect, useId, useState, lazy } from "react"
 import { useWindow } from "../../contexts/WindowContext"
+import { usePyIDEStore } from "../../stores/pyIDEStore"
 const CodeEditor = lazy(() => import("@uiw/react-textarea-code-editor"))
 
 export default function PyIDE() {
   const { setIsResizable, setInitialSize } = useWindow()
   const { runCode, deleteCallback } = usePython()
   const [output, setOutput] = useState("")
-  const [code, setCode] = useState(`import math
-
-print("Hello, world!")
-print("Square root of 2 is", math.sqrt(2))`)
+  const { code, setCode } = usePyIDEStore()
   const python_id = "pyide-" + useId()
 
   async function handleRun() {
