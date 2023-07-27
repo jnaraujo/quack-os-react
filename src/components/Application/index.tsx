@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
-import { useWindowSize } from "react-use"
+import { useEffect, useState } from "react"
 import { useApps } from "../../hooks/useApp"
 import clsx from "clsx"
 import AppWrapper from "./AppWrapper"

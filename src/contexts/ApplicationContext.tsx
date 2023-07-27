@@ -1,5 +1,28 @@
-import { createContext, useState, ReactNode, useMemo } from "react"
-import { ApplicationType, App } from "../types/ApplicationType"
+import { createContext, useState, ReactNode, useMemo, lazy } from "react"
+import { App } from "../types/ApplicationType"
+
+const APPLICATIONS = {
+  clock: lazy(() => import("../components/Apps/Clock")),
+  calculator: lazy(() => import("../components/Apps/Calculator")),
+  navigator: lazy(() => import("../components/Apps/Navigator")),
+  pyide: lazy(() => import("../components/Apps/PyIDE")),
+  terminal: lazy(() => import("../components/Apps/Terminal")),
+}
+
+export type ApplicationName = keyof typeof APPLICATIONS
+
+interface AddAppProps {
+  name: ApplicationName
+  x?: number
+  y?: number
+}
+
+export interface ApplicationType {
+  apps: App[]
+  addApp: (props: AddAppProps) => void
+  removeApp: (id: string) => void
+  clearApps: () => void
+}
 
 const ApplicationContext = createContext<ApplicationType>({} as ApplicationType)
 
@@ -13,9 +36,18 @@ function randomFixedInteger(length: number) {
 const ApplicationProvider = ({ children }: { children: ReactNode }) => {
   const [apps, setApps] = useState<App[]>([])
 
-  const addApp = (app: App) => {
-    app.id = randomFixedInteger(8).toString()
-    app.start = Date.now()
+  const addApp = ({ name, x, y }: AddAppProps) => {
+    const Comp = APPLICATIONS[name]
+
+    const app: App = {
+      id: randomFixedInteger(8).toString(),
+      Node: Comp,
+      title: name,
+      start: Date.now(),
+      x: x,
+      y: y,
+    }
+
     setApps([...apps, app])
   }
 

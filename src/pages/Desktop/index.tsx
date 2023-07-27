@@ -1,5 +1,6 @@
-import { lazy, ReactNode, useEffect } from "react"
+import { useEffect } from "react"
 import { useWindowSize } from "react-use"
+import { ApplicationName } from "../../contexts/ApplicationContext"
 
 // hooks
 import { useApps } from "../../hooks/useApp"
@@ -10,37 +11,16 @@ import TopBar from "../../components/TopBar"
 import Application from "../../components/Application"
 
 // apps
-import { AppsOnDesktop, openApp } from "./helper"
-const Clock = lazy(() => import("../../components/Apps/Clock"))
+import { AppsOnDesktop } from "./helper"
 import WelcomeCard from "../../components/WelcomeCard"
 
 const Desktop = () => {
-  const { apps, addApp } = useApps()
   const { width } = useWindowSize()
+  const { apps, addApp } = useApps()
 
   useEffect(() => {
-    addApp({
-      Node: Clock,
-      id: "clock",
-      title: "Clock",
-      x: width - 400,
-      y: 20,
-    })
+    addApp({ name: "clock", x: width - 400, y: 20 })
   }, [])
-
-  const onDoubleClick = (app: {
-    title: string
-    id: string
-    Node: ReactNode | any
-  }) => {
-    openApp(app.id)
-    return addApp({
-      Node: app.Node,
-      id: app.id,
-      title: app.title,
-      start: Date.now(),
-    })
-  }
 
   return (
     <>
@@ -56,13 +36,7 @@ const Desktop = () => {
             <AppIcon
               key={app.id}
               isDraggable
-              onDoubleClick={() =>
-                onDoubleClick({
-                  title: app.title,
-                  id: app.id,
-                  Node: app.Node,
-                })
-              }
+              onDoubleClick={() => addApp({ name: app.id })}
               defaultPosition={{ x: 10, y: 10 }}
               icon={app.icon}
               title={app.title}

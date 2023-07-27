@@ -1,6 +1,7 @@
 import { NavigateFunction } from "react-router-dom"
-import { ApplicationType } from "../../../types/ApplicationType"
 import { Commands } from "./types"
+import { ApplicationType } from "../../../contexts/ApplicationContext"
+
 const commands = (
   useApps: ApplicationType,
   navigate: NavigateFunction,
