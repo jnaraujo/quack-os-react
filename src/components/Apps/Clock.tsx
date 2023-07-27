@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { useWindow } from "../../contexts/WindowContext"
 
 export default function Clock() {
+  const { setInitialSize } = useWindow()
   const [time, setTime] = useState({
     hours: "00",
     minutes: "00",
@@ -20,6 +22,10 @@ export default function Clock() {
   }
 
   useEffect(() => {
+    setInitialSize({
+      width: cardWidth + 30,
+      height: cardHeight + 80,
+    })
     updateClock()
     const interval = setInterval(updateClock, 1000)
 

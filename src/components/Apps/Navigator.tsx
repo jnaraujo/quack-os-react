@@ -1,9 +1,19 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useWindow } from "../../contexts/WindowContext"
 
 function Navigator() {
+  const { setInitialSize, setIsResizable } = useWindow()
   const [url, setUrl] = useState("")
 
   const [history, setHistory] = useState<string[]>([])
+
+  useEffect(() => {
+    setInitialSize({
+      width: 600,
+      height: 450,
+    })
+    setIsResizable(true)
+  }, [])
 
   const backHistory = () => {
     const newHistory = [...history]
@@ -39,7 +49,7 @@ function Navigator() {
   const page = history[0]
 
   return (
-    <div className="flex h-[400px] w-[600px] flex-col">
+    <div className="flex h-full w-full flex-col">
       <div className="flex h-6">
         <button
           onClick={backHistory}

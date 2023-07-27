@@ -5,8 +5,10 @@ import { commands } from "./helper"
 import styles from "./terminal.module.css"
 import { usePython } from "../../../contexts/PythonContext"
 import { useEffect, useId } from "react"
+import { useWindow } from "../../../contexts/WindowContext"
 
 export default function Terminal() {
+  const { setInitialSize, setIsResizable } = useWindow()
   const navigate = useNavigate()
   const apps = useApps()
   const { runCode, deleteCallback } = usePython()
@@ -17,13 +19,18 @@ export default function Terminal() {
   }
 
   useEffect(() => {
+    setInitialSize({
+      width: 550,
+      height: 380,
+    })
+    setIsResizable(true)
     return () => {
       deleteCallback(python_id)
     }
   }, [])
 
   return (
-    <div className="h-[300px] w-[500px] antialiased">
+    <div className="h-full w-full antialiased">
       <ReactTerminal
         className={styles.terminal}
         commands={commands(apps, navigate, runPython)}

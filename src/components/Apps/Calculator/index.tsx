@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { CalculatorFunctions } from "./helper"
 import { ICalculatorProps } from "./types"
 import clsx from "clsx"
+import { useWindow } from "../../../contexts/WindowContext"
 
 const Button = ({ text, onClick, ...rest }: ICalculatorProps) => {
   return (
@@ -21,6 +22,7 @@ const Button = ({ text, onClick, ...rest }: ICalculatorProps) => {
 }
 
 export default function Calculator() {
+  const { setInitialSize } = useWindow()
   const [display, setDisplay] = useState("0")
   const { handleClick } = new CalculatorFunctions(display, setDisplay)
 
@@ -32,6 +34,13 @@ export default function Calculator() {
     ["0", ".", "="],
   ]
 
+  useEffect(() => {
+    setInitialSize({
+      width: 300,
+      height: 460,
+    })
+  }, [])
+
   return (
     <div
       style={{
@@ -39,7 +48,7 @@ export default function Calculator() {
         backgroundRepeat: "repeat",
         backgroundSize: "150px",
       }}
-      className="flex h-[420px] w-[300px] flex-col items-center justify-evenly bg-white"
+      className="flex h-full w-full flex-col items-center justify-evenly bg-white"
     >
       <div className="flex h-12 w-[80%] items-center justify-end border-[3px] border-black bg-white px-4">
         <p className="overflow-hidden text-2xl">{display.slice(0, 10)}</p>
