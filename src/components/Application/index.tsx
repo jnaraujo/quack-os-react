@@ -92,9 +92,6 @@ function Application({ Node, ...props }: IApplicationProps) {
         <div
           className={clsx(
             "flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-md bg-white",
-            {
-              "opacity-0": loading === true,
-            },
           )}
         >
           <WindowProvider
@@ -104,7 +101,14 @@ function Application({ Node, ...props }: IApplicationProps) {
             initialSize={initialSize}
             setInitialSize={setInitialSize}
           >
-            <AppWrapper Node={Node} appID={props.id} />
+            <div
+              className={clsx(
+                "h-full w-full",
+                loading ? "opacity-0" : "opacity-100",
+              )}
+            >
+              <AppWrapper Node={Node} appID={props.id} />
+            </div>
           </WindowProvider>
         </div>
       </div>
