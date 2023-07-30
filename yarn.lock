@@ -770,6 +770,11 @@
     "@babel/plugin-transform-react-jsx-source" "^7.22.5"
     react-refresh "^0.14.0"
 
+"@webcontainer/api@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@webcontainer/api/-/api-1.1.5.tgz#bb19832a75180c19d378aa4fb60678cec7450593"
+  integrity sha512-qMJyqO+A8+B8JKW/IW9KVQblAiEQwesq7ka6w8pgm6DXKWCQaPVOco4Zo7FxZ09OmBIX+lnXyfKbQzXiORLGJg==
+
 "@xobotyi/scrollbar-width@^1.9.5":
   version "1.9.5"
   resolved "https://registry.yarnpkg.com/@xobotyi/scrollbar-width/-/scrollbar-width-1.9.5.tgz#80224a6919272f405b87913ca13b92929bdf3c4d"

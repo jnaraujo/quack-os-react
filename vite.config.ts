@@ -13,6 +13,12 @@ export default defineConfig({
       gzipSize: true,
     }),
   ],
+  server: {
+    headers: {
+      "Cross-Origin-Embedder-Policy": "require-corp",
+      "Cross-Origin-Opener-Policy": "same-origin",
+    },
+  },
   resolve: {
     alias: {
       react: "preact/compat",

@@ -1,0 +1,101 @@
+import { WebContainer } from "@webcontainer/api"
+import { createContext, useContext, useEffect, useState } from "react"
+
+interface WebContainerContextProps {
+  exec(cmd: string[], output: (chunk: string) => void): Promise<void>
+  webContainer: WebContainer
+  cd(path: string): void
+}
+
+const WebContainerContext = createContext({} as WebContainerContextProps)
+
+export const useWebContainer = () => useContext(WebContainerContext)
+
+export const WebContainerProvider = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
+  const [webContainer, setWebContainer] = useState<WebContainer>()
+  const [path, setPath] = useState<string>("/home/quackos")
+
+  function cd(to: string) {
+    return new Promise<void>((resolve, reject) => {
+      let newPath = ""
+
+      if (to.startsWith("/")) {
+        newPath = to
+      } else {
+        newPath = `${path}/${to}`
+      }
+
+      webContainer?.spawn("jsh", ["-c", `cd ${newPath}`]).then((process) => {
+        process.exit.then((exitCode) => {
+          if (exitCode !== 0) {
+            reject(new Error(`cd: ${to}: No such file or directory`))
+          } else {
+            setPath(newPath)
+            resolve()
+          }
+        })
+      })
+    })
+  }
+
+  async function exec(cmd: string[], output: (chunk: string) => void) {
+    if (!webContainer) return
+
+    const process = await webContainer.spawn("jsh", [
+      "-c",
+      `cd ${path}; ${cmd.join(" ")}`,
+    ])
+
+    const installExitCode = await process.exit
+
+    if (installExitCode !== 0) {
+      return process.output.pipeTo(
+        new WritableStream({
+          write(chunk) {
+            output("Error: " + chunk)
+            process.kill()
+          },
+        }),
+      )
+    }
+
+    process.output.pipeTo(
+      new WritableStream({
+        write(chunk) {
+          output(chunk)
+          process.kill()
+        },
+      }),
+    )
+  }
+
+  useEffect(() => {
+    async function fn() {
+      if (webContainer) return
+
+      setWebContainer(
+        await WebContainer.boot({
+          workdirName: "quackos",
+        }),
+      )
+    }
+
+    fn()
+
+    return () => {
+      webContainer?.teardown()
+    }
+  }, [])
+
+  return (
+    <WebContainerContext.Provider
+      value={{ exec, webContainer: webContainer!, cd }}
+    >
+      {children}
+    </WebContainerContext.Provider>
+  )
+}
