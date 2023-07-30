@@ -18,6 +18,7 @@ export const WebContainerProvider = ({
 }) => {
   const [webContainer, setWebContainer] = useState<WebContainer>()
   const [path, setPath] = useState<string>("/home/quackos")
+  const [loading, setLoading] = useState<boolean>(false)
 
   function cd(to: string) {
     return new Promise<void>((resolve, reject) => {
@@ -43,7 +44,10 @@ export const WebContainerProvider = ({
   }
 
   async function exec(cmd: string[], output: (chunk: string) => void) {
-    if (!webContainer) return
+    if (!webContainer || loading) {
+      load()
+      return output("Loading web container...")
+    }
 
     const process = await webContainer.spawn("jsh", [
       "-c",
@@ -73,19 +77,22 @@ export const WebContainerProvider = ({
     )
   }
 
-  useEffect(() => {
-    async function fn() {
-      if (webContainer) return
-
-      setWebContainer(
-        await WebContainer.boot({
-          workdirName: "quackos",
-        }),
-      )
+  async function load() {
+    if (webContainer || loading) {
+      console.log("Web container already loaded")
+      return
     }
+    setLoading(true)
+    console.log("Loading web container...")
 
-    fn()
+    const container = await WebContainer.boot({
+      workdirName: "quackos",
+    })
+    setWebContainer(container)
+    setLoading(false)
+  }
 
+  useEffect(() => {
     return () => {
       webContainer?.teardown()
     }
