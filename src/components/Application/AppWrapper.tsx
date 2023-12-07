@@ -7,7 +7,7 @@ interface IAppWrapperProps {
 
 const AppWrapper: React.FC<IAppWrapperProps> = ({ Node, appID }) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <Node appId={appID} />
     </Suspense>
   )
