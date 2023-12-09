@@ -8,15 +8,14 @@ import { useWindowContext } from "./helper"
 import Draggable from "./Draggable"
 
 function Application({ Node, ...props }: IApplicationProps) {
-  const { removeApp } = useApps()
-
-  const { isResizable, setIsResizable, initialSize, setInitialSize } =
-    useWindowContext()
-
   const [drag, setDrag] = useState(false)
   const [mouse, setMouse] = useState<MouseEvent>()
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [loading, setLoading] = useState(true)
+
+  const { removeApp } = useApps()
+  const { isResizable, setIsResizable, initialSize, setInitialSize } =
+    useWindowContext()
 
   const move = (event: any) => {
     setMouse(event)
