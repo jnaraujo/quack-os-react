@@ -13,7 +13,7 @@ function Application({ Node, ...props }: IApplicationProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [loading, setLoading] = useState(true)
 
-  const { removeApp } = useApps()
+  const { removeApp, setAppOnFocus } = useApps()
   const { isResizable, setIsResizable, initialSize, setInitialSize } =
     useWindowContext()
 
@@ -55,8 +55,11 @@ function Application({ Node, ...props }: IApplicationProps) {
           height: isFullscreen ? "calc(100vh - 40px)" : initialSize.height,
         }}
         className={clsx(
-          "z-10 flex flex-col items-center rounded-lg border-[6px] border-black",
+          "flex flex-col items-center rounded-lg border-[6px] border-black",
         )}
+        onMouseDown={() => {
+          setAppOnFocus(props.id)
+        }}
       >
         <div
           className="z-30 mt-0 flex h-8 w-full select-none items-center border-2 border-black bg-black text-white"

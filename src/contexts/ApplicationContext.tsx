@@ -1,4 +1,11 @@
-import { createContext, useState, ReactNode, useMemo, lazy } from "react"
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useMemo,
+  lazy,
+  useEffect,
+} from "react"
 import { App } from "../types/ApplicationType"
 
 const APPLICATIONS = {
@@ -22,6 +29,8 @@ export interface ApplicationType {
   addApp: (props: AddAppProps) => void
   removeApp: (id: string) => void
   clearApps: () => void
+  appOnFocus: string
+  setAppOnFocus: (id: string) => void
 }
 
 const ApplicationContext = createContext<ApplicationType>({} as ApplicationType)
@@ -35,6 +44,17 @@ function randomFixedInteger(length: number) {
 
 const ApplicationProvider = ({ children }: { children: ReactNode }) => {
   const [apps, setApps] = useState<App[]>([])
+  const [appOnFocus, setAppOnFocus] = useState("")
+
+  useEffect(() => {
+    const index = apps.findIndex(({ id }) => id === appOnFocus)
+    const app = apps[index]
+
+    const copyApps = apps.toSpliced(index, 1)
+    copyApps.push(app)
+
+    setApps(copyApps)
+  }, [appOnFocus])
 
   const addApp = ({ name, x, y }: AddAppProps) => {
     const Comp = APPLICATIONS[name]
@@ -48,6 +68,8 @@ const ApplicationProvider = ({ children }: { children: ReactNode }) => {
       y: y,
     }
 
+    setAppOnFocus(app.id)
+
     setApps([...apps, app])
   }
 
@@ -59,18 +81,17 @@ const ApplicationProvider = ({ children }: { children: ReactNode }) => {
     setApps([])
   }
 
-  const value = useMemo(
-    () => ({
-      apps,
-      addApp,
-      removeApp,
-      clearApps,
-    }),
-    [apps],
-  )
-
   return (
-    <ApplicationContext.Provider value={value}>
+    <ApplicationContext.Provider
+      value={{
+        apps,
+        addApp,
+        removeApp,
+        clearApps,
+        appOnFocus,
+        setAppOnFocus,
+      }}
+    >
       {children}
     </ApplicationContext.Provider>
   )
