@@ -47,7 +47,7 @@ const ApplicationProvider = ({ children }: { children: ReactNode }) => {
   const [appOnFocus, setAppOnFocus] = useState("")
 
   useEffect(() => {
-    const index = apps.findIndex(({ id }) => id === appOnFocus)
+    const index = apps.findIndex((app) => app.id === appOnFocus)
     const app = apps[index]
 
     const copyApps = apps.toSpliced(index, 1)
