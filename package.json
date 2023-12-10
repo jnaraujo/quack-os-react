@@ -52,7 +52,6 @@
     "tailwindcss": "^3.3.3",
     "typescript": "*",
     "vite": "^4.4.6",
-    "vite-plugin-chunk-split": "^0.5.0",
     "vite-plugin-wasm": "^3.2.2"
   }
 }
