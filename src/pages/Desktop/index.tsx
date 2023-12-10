@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import { useWindowSize } from "react-use"
-import { ApplicationName } from "../../contexts/ApplicationContext"
 
 // hooks
 import { useApps } from "../../hooks/useApp"
