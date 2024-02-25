@@ -13,11 +13,10 @@
   },
   "dependencies": {
     "@uiw/react-textarea-code-editor": "^2.1.7",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react": "^4.2.1",
     "@webcontainer/api": "^1.1.5",
     "clsx": "^2.0.0",
     "framer-motion": "^7.6.1",
-    "preact": "^10.16.0",
     "prettier": "^3.0.0",
     "pyodide": "^0.23.4",
     "react": "^18.2.0",
@@ -30,8 +29,6 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.7.0",
-    "@prefresh/vite": "^2.4.1",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
