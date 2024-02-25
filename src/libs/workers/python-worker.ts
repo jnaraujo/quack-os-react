@@ -3,7 +3,7 @@ import { PyodideInterface, loadPyodide } from "pyodide"
 let pyodide: PyodideInterface
 async function loadPyodideAndPackages() {
   pyodide = await loadPyodide({
-    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/",
+    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
   })
 }
 
