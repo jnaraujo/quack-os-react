@@ -16,6 +16,11 @@ export default defineConfig({
   worker: {
     format: "es",
   },
+  resolve: {
+    alias: {
+      "node-fetch": "isomorphic-fetch",
+    },
+  },
   server: {
     headers: {
       "Cross-Origin-Embedder-Policy": "require-corp",

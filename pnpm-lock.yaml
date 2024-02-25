@@ -20,12 +20,15 @@ dependencies:
   framer-motion:
     specifier: ^7.6.1
     version: 7.10.3(react-dom@18.2.0)(react@18.2.0)
+  isomorphic-fetch:
+    specifier: ^3.0.0
+    version: 3.0.0
   prettier:
     specifier: ^3.0.0
     version: 3.1.0
   pyodide:
-    specifier: ^0.23.4
-    version: 0.23.4
+    specifier: ^0.25.0
+    version: 0.25.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -2984,6 +2987,15 @@ packages:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
 
+  /isomorphic-fetch@3.0.0:
+    resolution: {integrity: sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==}
+    dependencies:
+      node-fetch: 2.7.0
+      whatwg-fetch: 3.6.20
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /iterator.prototype@1.1.2:
     resolution: {integrity: sha512-DR33HMMr8EzwuRL8Y9D3u2BMj8+RqSE850jfGu59kS7tbmPLzGkZmVSfyCFSDxuZiEY6Rzt3T2NA/qU+NwVj1w==}
     dependencies:
@@ -3622,15 +3634,13 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pyodide@0.23.4:
-    resolution: {integrity: sha512-WpQUHaIXQ1xede5BMqPAjBcmopxN22s5hEsYOR8T7/UW/fkNLFUn07SaemUgthbtvedD5JGymMMj4VpD9sGMTg==}
+  /pyodide@0.25.0:
+    resolution: {integrity: sha512-RagtX3TfV2M0QAfThG2SMvwE31ikqAFDUXc5/4xhppEoVf4VbL7L0kbKOIdSNg7MbVsHELVxftk66WvT926GpA==}
     dependencies:
       base-64: 1.0.0
-      node-fetch: 2.7.0
       ws: 8.14.2
     transitivePeerDependencies:
       - bufferutil
-      - encoding
       - utf-8-validate
     dev: false
 
@@ -4651,6 +4661,10 @@ packages:
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    dev: false
+
+  /whatwg-fetch@3.6.20:
+    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
     dev: false
 
   /whatwg-url@5.0.0:
