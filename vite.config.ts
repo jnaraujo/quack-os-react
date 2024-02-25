@@ -13,6 +13,9 @@ export default defineConfig({
     }),
     react(),
   ],
+  worker: {
+    format: "es",
+  },
   server: {
     headers: {
       "Cross-Origin-Embedder-Policy": "require-corp",
