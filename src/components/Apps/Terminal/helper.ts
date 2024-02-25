@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router-dom"
 import { Commands } from "./types"
 import { useWebContainer } from "../../../contexts/WebContainerContext"
 import { useApps } from "../../../hooks/useApp"
 
 const commands = (runCode: any): Commands => {
   const { apps, removeApp } = useApps()
-  const navigate = useNavigate()
   const { exec, webContainer, cd } = useWebContainer()
 
   return {
@@ -196,7 +194,7 @@ const commands = (runCode: any): Commands => {
       description: "Reboot the computer.",
       usage: "reboot",
       fn: () => {
-        navigate(0)
+        window.location.reload()
         return ""
       },
     },

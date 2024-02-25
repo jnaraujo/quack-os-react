@@ -1,5 +1,4 @@
 import "./styles/globals.scss"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ApplicationProvider from "./contexts/ApplicationContext"
 
 // Pages
@@ -8,15 +7,11 @@ import { WebContainerProvider } from "./contexts/WebContainerContext"
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ApplicationProvider>
-        <WebContainerProvider>
-          <Routes>
-            <Route path="/" element={<Main />} />
-          </Routes>
-        </WebContainerProvider>
-      </ApplicationProvider>
-    </BrowserRouter>
+    <ApplicationProvider>
+      <WebContainerProvider>
+        <Main />
+      </WebContainerProvider>
+    </ApplicationProvider>
   )
 }
 

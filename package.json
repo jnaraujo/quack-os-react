@@ -23,7 +23,6 @@
     "react-console-emulator": "^5.0.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
-    "react-router-dom": "^6.3.0",
     "react-use": "^17.4.0",
     "vitest": "^0.24.3",
     "zustand": "^4.3.9"
@@ -48,6 +47,6 @@
     "tailwindcss": "^3.3.3",
     "typescript": "*",
     "vite": "^5.1.4",
-    "vite-plugin-wasm": "^3.2.2"
+    "vite-plugin-wasm": "^3.3.0"
   }
 }
