@@ -1,16 +1,15 @@
-import { usePython } from "../../contexts/PythonContext"
 import Button from "../ui/Button"
-import { useEffect, useId, useState, lazy } from "react"
+import { useEffect, useState, lazy } from "react"
 import { useWindow } from "../../contexts/WindowContext"
 import { usePyIDEStore } from "../../stores/pyIDEStore"
+import { usePython } from "../../hooks/usePython"
 const CodeEditor = lazy(() => import("@uiw/react-textarea-code-editor"))
 
 export default function PyIDE() {
   const { setIsResizable, setInitialSize } = useWindow()
-  const { runCode, deleteCallback } = usePython()
+  const { runCode } = usePython()
   const [output, setOutput] = useState("")
   const { code, setCode } = usePyIDEStore()
-  const python_id = "pyide-" + useId()
 
   async function handleRun() {
     setOutput("Running...")
@@ -18,7 +17,8 @@ export default function PyIDE() {
     const input = code.trim()
 
     let result = ""
-    runCode(input, python_id, (output) => {
+
+    runCode(input, (output) => {
       result += output + "\n"
       setOutput(result)
     })
@@ -30,9 +30,6 @@ export default function PyIDE() {
       width: 550,
       height: 380,
     })
-    return () => {
-      deleteCallback(python_id)
-    }
   }, [])
 
   function handleOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {

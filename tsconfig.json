@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "moduleResolution": "Node",
     "outDir": "dist",
-    "strictFunctionTypes": false
+    "strictFunctionTypes": false,
+    "types": ["vite/client"]
   },
   "exclude": [
     "node_modules",

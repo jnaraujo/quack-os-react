@@ -4,7 +4,6 @@ import ApplicationProvider from "./contexts/ApplicationContext"
 
 // Pages
 import Main from "./pages/Home"
-import { PythonProvider } from "./contexts/PythonContext"
 import { WebContainerProvider } from "./contexts/WebContainerContext"
 
 const App = () => {
@@ -12,11 +11,9 @@ const App = () => {
     <BrowserRouter>
       <ApplicationProvider>
         <WebContainerProvider>
-          <PythonProvider>
-            <Routes>
-              <Route path="/" element={<Main />} />
-            </Routes>
-          </PythonProvider>
+          <Routes>
+            <Route path="/" element={<Main />} />
+          </Routes>
         </WebContainerProvider>
       </ApplicationProvider>
     </BrowserRouter>
