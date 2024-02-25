@@ -1,19 +1,18 @@
 import ReactTerminal from "react-console-emulator"
 import { commands } from "./helper"
 import styles from "./terminal.module.css"
-import { usePython } from "../../../contexts/PythonContext"
-import { useEffect, useId } from "react"
+import { useEffect } from "react"
 import { useWindow } from "../../../contexts/WindowContext"
+import { usePython } from "../../../hooks/usePython"
 
 export default function Terminal() {
   const { setInitialSize, setIsResizable } = useWindow()
-  const { runCode, deleteCallback } = usePython()
-  const python_id = "terminal-" + useId()
+  const { runCode } = usePython()
 
   const commandList = commands(runPython)
 
   function runPython(code: string, cb: (result: string) => void) {
-    runCode(code, python_id, cb)
+    runCode(code, cb)
   }
 
   useEffect(() => {
@@ -22,10 +21,6 @@ export default function Terminal() {
       height: 380,
     })
     setIsResizable(true)
-
-    return () => {
-      deleteCallback(python_id)
-    }
   }, [])
 
   return (
