@@ -12,7 +12,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx . --fix"
   },
   "dependencies": {
-    "@uiw/react-textarea-code-editor": "^2.1.7",
+    "@uiw/react-textarea-code-editor": "^3.0.2",
     "@vitejs/plugin-react": "^4.2.1",
     "@webcontainer/api": "^1.1.5",
     "clsx": "^2.0.0",

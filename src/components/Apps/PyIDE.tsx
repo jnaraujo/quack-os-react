@@ -1,5 +1,5 @@
 import Button from "../ui/Button"
-import { useEffect, useState, lazy } from "react"
+import { useEffect, useState, lazy, Suspense } from "react"
 import { useWindow } from "../../contexts/WindowContext"
 import { usePyIDEStore } from "../../stores/pyIDEStore"
 import { usePython } from "../../hooks/usePython"
@@ -44,13 +44,15 @@ export default function PyIDE() {
         </Button>
       </div>
       <div className="flex-1 overflow-auto">
-        <CodeEditor
-          className="!min-h-full !overflow-hidden !bg-gray-200 !text-sm"
-          onChange={handleOnChange}
-          data-color-mode="light"
-          language="python"
-          value={code}
-        />
+        <Suspense>
+          <CodeEditor
+            className="!min-h-full !overflow-hidden !bg-gray-200 !text-sm"
+            onChange={handleOnChange}
+            data-color-mode="light"
+            language="python"
+            value={code}
+          />
+        </Suspense>
       </div>
       <div className="h-[25%] w-full overflow-auto bg-gray-300 p-2 text-sm">
         {output.split("\n").map((line, i) => (

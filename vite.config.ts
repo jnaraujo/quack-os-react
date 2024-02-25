@@ -21,6 +21,17 @@ export default defineConfig({
       "node-fetch": "isomorphic-fetch",
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes("refractor")) {
+            return "refractor"
+          }
+        },
+      },
+    },
+  },
   server: {
     headers: {
       "Cross-Origin-Embedder-Policy": "require-corp",
