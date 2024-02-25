@@ -22,7 +22,7 @@ export function usePython() {
     interruptBuffer.current[0] = 2
   }
 
-  async function runCode(code: string, cb: (output: string) => void) {
+  function runCode(code: string, cb: (output: string) => void) {
     interruptExecution() // Stop execution if it's running
     interruptBuffer.current[0] = 0 // Reset the interrupt buffer
 
