@@ -3,7 +3,7 @@ import { useWindow } from "../../contexts/WindowContext"
 
 function Navigator() {
   const { setInitialSize, setIsResizable } = useWindow()
-  const [url, setUrl] = useState("")
+  const [url, setUrl] = useState(window.location.href)
 
   const [history, setHistory] = useState<string[]>([])
 
@@ -69,7 +69,7 @@ function Navigator() {
       {page ? (
         <iframe
           className="h-full"
-          sandbox="allow-same-origin"
+          sandbox="allow-same-origin allow-scripts"
           src={history.at(-1)}
         />
       ) : (
