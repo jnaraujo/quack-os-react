@@ -1,4 +1,4 @@
-import { motion, useAnimationControls, useDragControls } from "framer-motion"
+import { motion, useDragControls } from "framer-motion"
 import { useEffect, useMemo } from "react"
 import { useWindowSize } from "react-use"
 
