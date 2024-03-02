@@ -1,4 +1,4 @@
-import { WebContainer } from "@webcontainer/api"
+import type { WebContainer } from "@webcontainer/api"
 import { createContext, useContext, useEffect, useState } from "react"
 
 interface WebContainerContextProps {
@@ -84,6 +84,10 @@ export const WebContainerProvider = ({
     }
     setLoading(true)
     console.log("Loading web container...")
+
+    const WebContainer = await import("@webcontainer/api").then(
+      (m) => m.WebContainer,
+    )
 
     const container = await WebContainer.boot({
       workdirName: "quackos",
