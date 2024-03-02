@@ -19,7 +19,7 @@ export default function Main() {
       {loading && <Loading />}
       <div
         className={clsx({
-          hidden: loading,
+          "absolute opacity-0": loading,
         })}
       >
         <Desktop />
