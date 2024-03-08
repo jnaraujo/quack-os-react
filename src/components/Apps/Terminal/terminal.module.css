@@ -1,6 +1,7 @@
 .terminal {
   background-color: theme("colors.white") !important;
   color: theme("colors.black") !important;
+  border-radius: 0 !important;
 }
 
 .text {
