@@ -1,4 +1,7 @@
+import { ApplicationName } from "../../contexts/ApplicationContext"
+
 interface IAppIconProps extends React.HTMLAttributes<HTMLDivElement> {
+  id: ApplicationName
   icon: string
   title: string
   isDraggable?: boolean

@@ -5,9 +5,11 @@ import { motion } from "framer-motion"
 import clsx from "clsx"
 
 import { IAppIconProps } from "./types"
+import { useIconsStore } from "../../stores/iconsStore"
 
 export default function AppIcon({
   onDoubleClick,
+  id,
   defaultPosition,
   isDraggable,
   title,
@@ -15,6 +17,7 @@ export default function AppIcon({
   height = 80,
   icon,
 }: IAppIconProps) {
+  const updatePos = useIconsStore((state) => state.updatePos)
   const [showAppBg, setShowAppBg] = useState(false)
   const [clickCount, setClickCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
@@ -55,6 +58,19 @@ export default function AppIcon({
         initial={defaultPosition}
         dragControls={controls}
         dragMomentum={false}
+        onDrag={() => {
+          const rawCoords = ref.current?.style.transform.match(
+            /^translateX\((.+)px\) translateY\((.+)px\) translateZ/,
+          )
+
+          if (!rawCoords) return
+
+          const coords = {
+            x: parseInt(rawCoords[1], 10),
+            y: parseInt(rawCoords[2], 10),
+          }
+          updatePos(id, coords)
+        }}
         ref={ref}
         onClickCapture={onClickContent}
         className={clsx(
