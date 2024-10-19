@@ -3,6 +3,7 @@ import { Account, ChatMessage, LetsChat } from "../../libs/chat"
 
 export default function Chat() {
   const anchorRef = useRef<HTMLDivElement>(null)
+  const viewRef = useRef<HTMLDivElement>(null)
   const chat = useRef<LetsChat | null>(null)
   const account = useRef<Account | null>(null)
   const [messages, setMessages] = useState<ChatMessage[]>([])
@@ -17,7 +18,17 @@ export default function Chat() {
 
       chat.current.onMessage((msg) => {
         setMessages((prev) => [...prev, msg])
-        // anchorRef.current?.scrollIntoView()
+
+        setTimeout(() => {
+          const curr = viewRef.current
+          if (!curr) return
+          if (curr.scrollHeight - curr.scrollTop < curr.clientHeight + 200) {
+            anchorRef.current?.scrollIntoView({
+              behavior: "smooth",
+              block: "end",
+            })
+          }
+        }, 10)
       })
     }
     connect()
@@ -57,7 +68,7 @@ export default function Chat() {
 
   return (
     <div className="flex flex-1 flex-col justify-between antialiased">
-      <div className="flex-1 overflow-y-auto">
+      <div ref={viewRef} className="flex-1 overflow-y-auto">
         {messages.map((m) => (
           <div key={m.id}>
             [
