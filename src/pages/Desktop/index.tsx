@@ -6,24 +6,82 @@ import TopBar from "../../components/TopBar"
 import Application from "../../components/Application"
 import WelcomeCard from "../../components/WelcomeCard"
 import { useIconsStore } from "../../stores/iconsStore"
+import { ApplicationName } from "../../contexts/ApplicationContext"
+
+interface Icon {
+  title: string
+  id: ApplicationName
+  icon: string
+  x: number
+  y: number
+}
+
+const desktopIcons: Array<Icon> = [
+  {
+    title: "Clock",
+    id: "clock",
+    icon: "icons/clock/Clock_Face.svg",
+    x: 10,
+    y: 10,
+  },
+  {
+    title: "Terminal",
+    id: "terminal",
+    icon: "/icons/applications/terminal.png",
+    x: 10,
+    y: 10,
+  },
+  {
+    title: "Duck's Boat Navigator",
+    id: "navigator",
+    icon: "/icons/applications/Brosen_windrose.svg",
+    x: 10,
+    y: 10,
+  },
+  {
+    title: "Calculator",
+    id: "calculator",
+    icon: "/icons/applications/calculator.svg",
+    x: 10,
+    y: 10,
+  },
+  {
+    title: "PyIDE",
+    id: "pyide",
+    icon: "/icons/applications/pyide.png",
+    x: 10,
+    y: 10,
+  },
+]
 
 const Desktop = () => {
-  const desktopIcons = useIconsStore((state) => state.apps)
+  const iconsStoreApps = useIconsStore((state) => state.apps)
   const { width } = useWindowSize()
   const { apps, addApp } = useApps()
 
   const icons = useMemo(() => {
-    return desktopIcons.map((app) => (
-      <AppIcon
-        key={app.id}
-        id={app.id}
-        isDraggable
-        onDoubleClick={() => addApp({ name: app.id })}
-        defaultPosition={{ x: app.x, y: app.y }}
-        icon={app.icon}
-        title={app.title}
-      />
-    ))
+    return desktopIcons.map((app) => {
+      let x = app.x,
+        y = app.y
+
+      const ic = iconsStoreApps.find((i) => i.id === app.id)
+      if (ic) {
+        x = ic.x
+        y = ic.y
+      }
+
+      return (
+        <AppIcon
+          key={app.id}
+          id={app.id}
+          isDraggable
+          onDoubleClick={() => addApp({ name: app.id })}
+          defaultPosition={{ x: x, y: y }}
+          icon={app.icon}
+          title={app.title}
+        />
+      )
+    })
   }, [addApp])
 
   useEffect(() => {
