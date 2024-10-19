@@ -14,6 +14,7 @@ const APPLICATIONS = {
   navigator: lazy(() => import("../components/Apps/Navigator")),
   pyide: lazy(() => import("../components/Apps/PyIDE")),
   terminal: lazy(() => import("../components/Apps/Terminal")),
+  quachat: lazy(() => import("../components/Apps/QuaChat")),
 }
 
 export type ApplicationName = keyof typeof APPLICATIONS

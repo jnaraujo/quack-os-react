@@ -52,6 +52,13 @@ const desktopIcons: Array<Icon> = [
     x: 10,
     y: 10,
   },
+  {
+    title: "QuaChat",
+    id: "quachat",
+    icon: "/icons/applications/quachat.png",
+    x: 10,
+    y: 10,
+  },
 ]
 
 const Desktop = () => {
