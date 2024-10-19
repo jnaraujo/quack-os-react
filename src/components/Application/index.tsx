@@ -105,7 +105,7 @@ function Application({ Node, ...props }: IApplicationProps) {
           >
             <div
               className={clsx(
-                "h-full w-full",
+                "flex h-full w-full",
                 loading ? "opacity-0" : "opacity-100",
               )}
             >
