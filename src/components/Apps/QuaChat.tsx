@@ -1,5 +1,6 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
-import { Account, ChatMessage, LetsChat } from "../../libs/chat"
+import { useEffect, useRef, useState } from "react"
+import { LetsChat } from "../../libs/chat"
+import { Account, ChatMessage } from "../../libs/protocol"
 
 export default function Chat() {
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -12,7 +13,7 @@ export default function Chat() {
     if (chat.current != null) return
 
     async function connect() {
-      chat.current = new LetsChat("wss://chat.jnaraujo.com/ws")
+      chat.current = new LetsChat("ws://localhost:3000/ws")
       await chat.current.connect()
       account.current = await chat.current.auth("Quack")
 
@@ -52,18 +53,17 @@ export default function Chat() {
     const content = (ev.currentTarget.elements as any).content.value as string
     ;(ev.currentTarget.elements as any).content.value = ""
 
-    await chat.current.sendMessage({
-      id: "",
-      is_command: false,
-      is_server: false,
-      room: {
-        id: "ALL",
-        name: "",
-      },
-      content: content,
-      created_at: new Date(Date.now()),
-      author: account.current,
-    })
+    await chat.current.sendPacket(
+      new ChatMessage(
+        account.current,
+        content,
+        {
+          id: "ALL",
+          name: "",
+        },
+        new Date(Date.now()),
+      ).toPacket(),
+    )
   }
 
   return (
@@ -78,7 +78,7 @@ export default function Chat() {
               hour12: true,
             })}
             ] [{m.room.name}] {"<"}
-            {m.id.slice(0, 6)}
+            {m.author?.id.slice(0, 6)}
             {">"} {m.author?.username}: {m.content}{" "}
           </div>
         ))}

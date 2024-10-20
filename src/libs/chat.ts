@@ -1,31 +1,15 @@
-export interface Account {
-  id: string
-  username: string
-}
-
-export interface CharRoom {
-  id: string
-  name: string
-}
-
-export interface ChatMessage {
-  id: string
-  is_server: boolean
-  room: CharRoom
-  author?: Account
-  content: string
-  created_at: Date
-  is_command: boolean
-}
+import * as protocol from "./protocol"
 
 export class LetsChat {
   private socket?: WebSocket
-  private account?: Account
+  private account?: protocol.Account
   constructor(private addr: string) {}
 
   connect() {
     return new Promise((resolve) => {
       const socket = new WebSocket(this.addr)
+      socket.binaryType = "arraybuffer"
+
       this.socket = socket
       socket.onopen = () => {
         resolve(true)
@@ -34,62 +18,49 @@ export class LetsChat {
   }
 
   async ping() {
-    return this.sendMessage({
-      id: "",
-      content: "client-ping",
-      created_at: new Date(Date.now()),
-      is_command: true,
-      is_server: false,
-      room: {
-        id: "",
-        name: "",
-      },
-      author: this.account,
-    })
+    return this.sendPacket(new protocol.PingMessage().toPacket())
   }
 
-  async auth(username: string): Promise<Account | null> {
-    this.socket?.send(
-      JSON.stringify({
-        username,
-      }),
-    )
+  async auth(username: string): Promise<protocol.Account | null> {
+    await this.sendPacket(new protocol.ClientAuthMessage(username).toPacket())
 
-    const serverAuthMsg = JSON.parse(await this.read())
+    const serverAuthMsg = protocol.ServerAuthMessage.fromPacket(
+      await this.readPacket(),
+    )
     if (serverAuthMsg.status !== "ok") {
       console.log("failed to login")
       return null
     }
 
-    this.account = JSON.parse(await this.read()) as Account
-    return this.account
+    this.account = serverAuthMsg.account
+    return this.account ?? null
   }
 
-  async sendMessage(msg: ChatMessage) {
-    this.send(JSON.stringify(msg))
+  async sendPacket(pkt: protocol.Packet) {
+    this.send(pkt.toBinary())
   }
 
-  onMessage(cb: (msg: ChatMessage) => void) {
+  onMessage(cb: (msg: protocol.ChatMessage) => void) {
     if (!this.socket) {
       return
     }
 
     this.socket.onmessage = (ev) => {
-      let m = JSON.parse(ev.data) as ChatMessage
-      m.created_at = new Date(m.created_at)
-      cb(m)
+      const pkt = protocol.Packet.fromBytes(ev.data)
+      cb(protocol.ChatMessage.fromPacket(pkt))
     }
   }
 
-  async readMessage() {
-    return JSON.parse(await this.read()) as ChatMessage
+  async readPacket() {
+    const data = await await this.read()
+    return protocol.Packet.fromBytes(data)
   }
 
-  send(message: string) {
+  send(message: any) {
     this.socket?.send(message)
   }
 
-  read(): Promise<string> {
+  read(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (!this.socket) {
         return reject(new Error("Socket is not initialized"))
