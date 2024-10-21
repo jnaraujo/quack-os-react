@@ -13,7 +13,7 @@ export default function Chat() {
     if (chat.current != null) return
 
     async function connect() {
-      chat.current = new LetsChat("ws://localhost:3000/ws")
+      chat.current = new LetsChat("wss://chat.jnaraujo.com/lc")
       await chat.current.connect()
       account.current = await chat.current.auth("Quack")
 
